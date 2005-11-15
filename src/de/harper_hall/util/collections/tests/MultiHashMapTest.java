@@ -6,6 +6,8 @@ import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;
 import org.eclipse.hyades.test.common.junit.HyadesTestCase;
 import org.eclipse.hyades.test.common.junit.HyadesTestSuite;
 
+import de.harper_hall.util.collections.MultiHashMap;
+
 /**
  * Generated code for the test suite <b>MultiHashMapTest</b> located at
  * <i>/HarperHallUtil/src/de/harper_hall/util/collections/tests/MultiHashMapTest.testsuite</i>.
@@ -60,7 +62,17 @@ public class MultiHashMapTest extends HyadesTestCase {
   public void singleAddRemove()
   throws Exception
   {
-  // Enter your code here
+    MultiHashMap<String,String> mmap = new MultiHashMap<String,String>();
+    
+    mmap.put("1","one");
+    mmap.put("2","two");
+    mmap.put("3","three");
+    
+    assertEquals(mmap.size(),3);
+    
+    mmap.remove("3");
+    assertEquals(mmap.size(),2);
+
   }
 
   /**
@@ -70,6 +82,20 @@ public class MultiHashMapTest extends HyadesTestCase {
   public void multiAddRemove()
   throws Exception
   {
-  // Enter your code here
+    MultiHashMap<String,String> mmap = new MultiHashMap<String,String>();
+    
+    mmap.put("1","one");
+    mmap.put("2","two");
+    mmap.put("2","zwo");
+    mmap.put("2","zwei");
+    mmap.put("3","three");
+    
+    assertEquals(3,mmap.size());
+    assertEquals(5,mmap.totalSize());
+    mmap.remove("3");
+    assertEquals(2,mmap.size());
+    mmap.remove("2","two");
+    assertEquals(2,mmap.size());
+    assertEquals(3,mmap.totalSize());
   }
 }

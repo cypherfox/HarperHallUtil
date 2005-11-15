@@ -501,13 +501,18 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
      * @see java.util.HashMap#remove(java.lang.Object)
      */
     public V remove(Object key) {
+      V retval;
+      Iterator iter;
       Collection<V> col = data.get(key);
       if(col == null) return null;
       
-      Iterator iter = col.iterator();
+      iter = col.iterator();
       if((iter == null)||(!iter.hasNext())) return null;
+      retval = (V)iter.next();
       
-      return (V)iter.next();
+      data.remove(key);
+      
+      return retval;
     }
 
     /**
