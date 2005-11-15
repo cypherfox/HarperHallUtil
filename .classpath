@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/home/sage/src/eclipse/extensions/eclipse/plugins/org.eclipse.hyades.test.tools.core_4.0.1/java.runner.jar"/>
+	<classpathentry kind="lib" path="/home/sage/src/eclipse/extensions/eclipse/plugins/org.eclipse.hyades.test.tools.core_4.0.1/common.runner.jar"/>
+	<classpathentry kind="var" path="ECLIPSE_HOME/plugins/org.junit_3.8.1/junit.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry sourcepath="/opt/java_stuff/commons-collections-3.1/src/java" kind="lib" path="/opt/java_stuff/apache-tomcat-5.5.12/shared/lib/common-collections.jar">
+		<attributes>
+			<attribute value="file:/opt/java_stuff/commons-collections-3.1/docs/apidocs/" name="javadoc_location"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
