@@ -80,9 +80,11 @@
           target: compile_java 
 	          compile all java classes                      
          - - - - - - - - - - - - - - - - - -->
-    <target name="compile_java">
-    	<javac srcdir="src"
-             destdir="bin"
+    <target name="compile_java" depends="init">
+    	<echo message="srcdir: ${srcdir}"/>
+    	<echo message="bindir: ${bindir}"/>
+    	<javac srcdir="${srcdir}"
+             destdir="${bindir}"
              classpath="${basedir}/pf.jar"
              debug="on"
     	/>            
@@ -91,11 +93,11 @@
 
 	
     <target name="distjar"  description="Create a jar for the HarperHallUtil project" depends="compile_java">
-        <jar jarfile="harperHallUtil.jar" includes="*.class" basedir="bin"/>
+        <jar jarfile="harperHallUtil.jar" includes="**/*.class" basedir="${bindir}"/>
     </target>
 	
-    <target name="srcjar"  description="Create a jar for the Wotan project">
-        <jar jarfile="harperHallUtil-src.jar" includes="*" basedir="src"/>
+    <target name="srcjar"  description="Create a source jar for the HarperHallUtil project">
+        <jar jarfile="harperHallUtil-src.jar" includes="**" basedir="${srcdir}"/>
     </target>
 	
 </project> 
