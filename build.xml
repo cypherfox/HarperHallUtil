@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="HarperHallUtil" default="distjar" basedir=".">
+
+    <!-- ================================= 
+          target: init              
+         ================================= -->
+    <target name="init" depends="" description="--> set up build process">
+    	<property name="srcdir" value="${basedir}/src"/>
+    	<property name="bindir" value="${basedir}/bin"/>        
+    	<property name="testdir" value="/tmp/HarperHallUtil"/>        
+    </target>
+
+	
+    <!-- ================================= 
+          target: prepare              
+         ================================= -->
+    <target name="prepare" depends="init" description="--> set directories, basic files, etc.">
+        <mkdir dir="${bindir}"/>
+    </target>
+
+
+    <!-- ================================= 
+          target: fetch              
+         ================================= -->
+    <target name="fetch" depends="init" description="get current code from versioninig system">
+        
+    </target>
+
+
+    <!-- ================================= 
+          target: compile              
+         ================================= -->
+    <target name="compile" depends="prepare" description="compile all code">
+    	<antcall target="compile_java" />
+    </target>
+
+
+    <!-- ================================= 
+          target: build              
+         ================================= -->
+    <target name="build" depends="prepare" description="incremtaly build all elements">
+    	<antcall target="compile" />        
+    	<antcall target="distjar" />        
+    </target>
+
+
+    <!-- ================================= 
+          target: docs              
+         ================================= -->
+    <target name="docs" depends="prepare" description="--> create all documentation">
+        
+    </target>
+
+
+    <!-- ================================= 
+          target: all              
+         ================================= -->
+    <target name="all"  description="--> description">
+    	<antcall target="build" />        
+    	<antcall target="docs" />        
+    	<antcall target="srcjar" />        
+
+        <depend srcdir="${srcdir}" />
+    </target>
+
+
+	
+    <!-- ================================= 
+          target: test              
+         ================================= -->
+    <target name="test" depends="build" description="run all tests">
+        <mkdir dir="${testdir}/chunk"/>
+        
+    </target>
+
+
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: compile_java 
+	          compile all java classes                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="compile_java">
+    	<javac srcdir="src"
+             destdir="bin"
+             classpath="${basedir}/pf.jar"
+             debug="on"
+    	/>            
+    </target>
+
+
+	
+    <target name="distjar"  description="Create a jar for the HarperHallUtil project" depends="compile_java">
+        <jar jarfile="harperHallUtil.jar" includes="*.class" basedir="bin"/>
+    </target>
+	
+    <target name="srcjar"  description="Create a jar for the Wotan project">
+        <jar jarfile="harperHallUtil-src.jar" includes="*" basedir="src"/>
+    </target>
+	
+</project> 
