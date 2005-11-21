@@ -1,4 +1,5 @@
-#Fri Nov 18 12:18:32 CET 2005
+#Mon Nov 21 20:47:57 CET 2005
 eclipse.preferences.version=1
 encoding//src/de/harper_hall/util/collections/tests/MultiHashMapTest.java=UTF-8
 encoding//src/de/harper_hall/util/math/tests/VectorTest.java=UTF-8
+encoding//src/de/harper_hall/util/nio/tests/ByteBufferHelperTest.java=UTF-8
