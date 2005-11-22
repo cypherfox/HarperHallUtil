@@ -55,6 +55,10 @@ public class ByteBufferHelperTest extends HyadesTestCase {
   public void compareNTest()
   throws Exception
   {
-  // Enter your code here
+    byte[] a = { 0 , 1, 2, 3};      // base  
+    byte[] b = { 0 , 1, 2};         // for n>3: -1
+    byte[] c = { 0 , 1, 2, 3, 4};   // for n<=4: 0, else +1
+    byte[] d = { 1, 2, 3};          // +1
+
   }
 }

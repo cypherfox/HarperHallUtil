@@ -5,6 +5,9 @@
  * 
  * $Id$
  * $Log$
+ * Revision 1.2  2005/11/22 19:36:37  behnke_l
+ * lockdown
+ *
  * Revision 1.1  2005/11/21 19:49:13  behnke_l
  * files added
  *
@@ -23,10 +26,25 @@ public class ByteBufferHelper {
    * @return -1 is a is smaller; 0 if they are equal to ; +1 if a is larger than b 
    */
   public static  int compareBufferN(ByteBuffer a, ByteBuffer b, int n){
-    int i;
+    int i, comp_n;
     ByteBuffer bt = b.slice();
     ByteBuffer at = a.slice();
     
+    comp_n = Math.min(n, at.capacity());
+    comp_n = Math.min(comp_n, bt.capacity());
+
+    for(i=0;i<comp_n;i++){
+      byte ab = at.get();
+      byte bb = bt.get();
+      if(ab < bb) return -1;
+      if(ab > bb) return +1;
+    }
+    // ok, so far they are equal
+    
+    if(at.hasRemaining() && bt.hasRemaining()){
+      
+    }
+      
     if((at.capacity() < bt.capacity()) && ( n > at.capacity())){
       return -1;
     } 
@@ -34,15 +52,7 @@ public class ByteBufferHelper {
       return +1;
     }
     
-    n = Math.min(n, at.capacity());
-    n = Math.min(n, bt.capacity());
 
-    for(i=0;i<n;i++){
-      byte ab = at.get();
-      byte bb = bt.get();
-      if(ab < bb) return -1;
-      if(ab > bb) return +1;
-    }
     return 0;
   }
 
