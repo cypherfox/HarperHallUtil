@@ -1,10 +1,14 @@
 package de.harper_hall.util.nio.tests;
 
+import java.nio.ByteBuffer;
+
 import junit.framework.Test;
 
 import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;
 import org.eclipse.hyades.test.common.junit.HyadesTestCase;
 import org.eclipse.hyades.test.common.junit.HyadesTestSuite;
+
+import de.harper_hall.util.nio.ByteBufferHelper;
 
 /**
  * Generated code for the test suite <b>ByteBufferHelperTest</b> located at
@@ -59,6 +63,26 @@ public class ByteBufferHelperTest extends HyadesTestCase {
     byte[] b = { 0 , 1, 2};         // for n>3: -1
     byte[] c = { 0 , 1, 2, 3, 4};   // for n<=4: 0, else +1
     byte[] d = { 1, 2, 3};          // +1
+    byte[] e = { -1, 0, 1, 2};      // -1
+
+    ByteBuffer buf_a = ByteBuffer.wrap(a);
+    ByteBuffer buf_b = ByteBuffer.wrap(b);
+    ByteBuffer buf_c = ByteBuffer.wrap(c);
+    ByteBuffer buf_d = ByteBuffer.wrap(d);
+    ByteBuffer buf_e = ByteBuffer.wrap(e);
+    
+    assertEquals(0, ByteBufferHelper.compareBufferN(buf_a,buf_b,3));
+    assertEquals(+1, ByteBufferHelper.compareBufferN(buf_a,buf_b,4));
+    assertEquals(+1, ByteBufferHelper.compareBufferN(buf_a,buf_b,5));
+    
+    assertEquals(0, ByteBufferHelper.compareBufferN(buf_a,buf_c,4));
+    assertEquals(-1, ByteBufferHelper.compareBufferN(buf_a,buf_c,5));
+    assertEquals(-1, ByteBufferHelper.compareBufferN(buf_a,buf_c,6));
+
+    assertEquals(-1, ByteBufferHelper.compareBufferN(buf_a,buf_d,3));
+    assertEquals(-1, ByteBufferHelper.compareBufferN(buf_a,buf_d,4));
+
+    assertEquals(1, ByteBufferHelper.compareBufferN(buf_a,buf_e,4));
 
   }
 }

@@ -1,0 +1,17 @@
+
+int a,b,c;
+
+a = 0x86;
+b =  a-128;
+c = (127-b)*-1;
+
+System.out.println("0x86 ="+c);
+
+a = 0x7F;
+
+b =  a-128;
+c = (128-b)*-1;
+
+System.out.println("0xFF ="+c);
+
+ (No explicit return value)

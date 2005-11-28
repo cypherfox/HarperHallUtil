@@ -5,6 +5,9 @@
  * 
  * $Id$
  * $Log$
+ * Revision 1.3  2005/11/28 20:46:53  behnke_l
+ * lockdown
+ *
  * Revision 1.2  2005/11/22 19:36:37  behnke_l
  * lockdown
  *
@@ -40,18 +43,9 @@ public class ByteBufferHelper {
       if(ab > bb) return +1;
     }
     // ok, so far they are equal
-    
-    if(at.hasRemaining() && bt.hasRemaining()){
-      
-    }
-      
-    if((at.capacity() < bt.capacity()) && ( n > at.capacity())){
-      return -1;
-    } 
-    if((bt.capacity() < at.capacity()) && ( n > bt.capacity())){
-      return +1;
-    }
-    
+
+    if(bt.capacity() < Math.min(at.capacity(),n)) return +1;
+    if(at.capacity() < Math.min(bt.capacity(),n)) return -1;
 
     return 0;
   }
