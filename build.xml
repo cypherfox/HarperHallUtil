@@ -2,13 +2,14 @@
 
 <project name="HarperHallUtil" default="distjar" basedir=".">
 
-    <!-- ================================= 
+	<property name="srcdir" value="${basedir}/src"/>
+	<property name="bindir" value="${basedir}/bin"/>        
+	<property name="testdir" value="/tmp/HarperHallUtil"/>        
+
+	<!-- ================================= 
           target: init              
          ================================= -->
     <target name="init" depends="" description="--> set up build process">
-    	<property name="srcdir" value="${basedir}/src"/>
-    	<property name="bindir" value="${basedir}/bin"/>        
-    	<property name="testdir" value="/tmp/HarperHallUtil"/>        
     </target>
 
 	
