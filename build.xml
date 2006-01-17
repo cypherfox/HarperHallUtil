@@ -5,7 +5,8 @@
 	<property name="srcdir" value="${basedir}/src"/>
 	<property name="bindir" value="${basedir}/bin"/>        
 	<property name="testdir" value="/tmp/HarperHallUtil"/>        
-
+	<property name="commonscollectiondir" value="/opt/java_stuff/opt/java_stuff/commons-collections-3.1/"/> 
+	
 	<!-- ================================= 
           target: init              
          ================================= -->
@@ -82,13 +83,20 @@
 	          compile all java classes                      
          - - - - - - - - - - - - - - - - - -->
     <target name="compile_java" depends="init">
-    	<echo message="srcdir: ${srcdir}"/>
+	    <path id="classpath">
+	    	<pathelement path="${basedir}/pf.jar"/>
+			<pathelement path="${commonscollectiondir}/commons-collections-3.1.jar"/>
+	    	<pathelement path="${log4jdir}/dist/lib/log4j-1.2.13.jar"/>
+		</path>
+
+	    <echo message="srcdir: ${srcdir}"/>
     	<echo message="bindir: ${bindir}"/>
     	<javac srcdir="${srcdir}"
-             destdir="${bindir}"
-             classpath="${basedir}/pf.jar"
+            destdir="${bindir}"    		
+            classpathref="classpath"
              debug="on"
     	/>            
+
     </target>
 
 
