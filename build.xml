@@ -5,7 +5,10 @@
 	<property name="srcdir" value="${basedir}/src"/>
 	<property name="bindir" value="${basedir}/bin"/>        
 	<property name="testdir" value="/tmp/HarperHallUtil"/>        
-	<property name="commonscollectiondir" value="/opt/java_stuff/opt/java_stuff/commons-collections-3.1/"/> 
+	
+	<property name="extlib.dir" value="/opt/java_stuff"/>
+	<property name="commonscollectiondir" value="${extlib.dir}/commons-collections-3.1/"/> 
+	<property name="log4j.jar" value="${extlib.dir}/logging-log4j-1.2.13/dist/lib/log4j-1.2.13.jar}" />
 	
 	<!-- ================================= 
           target: init              
@@ -86,7 +89,7 @@
 	    <path id="classpath">
 	    	<pathelement path="${basedir}/pf.jar"/>
 			<pathelement path="${commonscollectiondir}/commons-collections-3.1.jar"/>
-	    	<pathelement path="${log4jdir}/dist/lib/log4j-1.2.13.jar"/>
+	    	<pathelement path="${log4j.jar}"/>
 		</path>
 
 	    <echo message="srcdir: ${srcdir}"/>
