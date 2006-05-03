@@ -11,6 +11,7 @@
 	<property name="junitdir" value="${extlib.dir}/eclipse-3.1/plugins/org.junit_3.8.1"/>
 	<property name="commonscollectiondir" value="${extlib.dir}/commons-collections-3.1/"/> 
 	<property name="log4j.jar" value="${extlib.dir}/logging-log4j-1.2.13/dist/lib/log4j-1.2.13.jar}" />
+	<property name="getopt.jar" value="${extlib.dir}/java-getopt-1.0.12/build/lib/gnu.getopt.jar"/>
 	
 	<!-- ================================= 
           target: init              
@@ -89,6 +90,7 @@
 		    	<pathelement path="${log4j.jar}"/>
 				<pathelement path="${junitdir}/junit.jar"/>
 				<pathelement path="${hyadesdir}/common.runner.jar"/>
+		    	<pathelement path="${getopt.jar}"/>
 				<pathelement path="${bindir}"/>
 			</classpath>
 			<formatter type="xml"/>
@@ -113,7 +115,8 @@
 			<pathelement path="${commonscollectiondir}/commons-collections-3.1.jar"/>
 	    	<pathelement path="${log4j.jar}"/>
 	    	<pathelement path="${junitdir}/junit.jar"/>
-			<pathelement path="${hyadesdir}/common.runner.jar"/>		    		    	
+			<pathelement path="${hyadesdir}/common.runner.jar"/>
+	    	<pathelement path="${getopt.jar}"/>
 		</path>
 
 	    <echo message="srcdir: ${srcdir}"/>
