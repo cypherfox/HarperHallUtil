@@ -25,6 +25,7 @@
          ================================= -->
     <target name="prepare" depends="init" description="--> set directories, basic files, etc.">
         <mkdir dir="${bindir}"/>
+		<mkdir dir="${test-report.dir}"/>
     </target>
 
 
