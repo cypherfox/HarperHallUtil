@@ -66,6 +66,7 @@
          ================================= -->
     <target name="all"  description="--> description">
     	<antcall target="build" />        
+		<antcall target="test"/>
     	<antcall target="docs" />        
     	<antcall target="srcjar" />        
 
