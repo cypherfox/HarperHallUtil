@@ -73,13 +73,33 @@
 
 
 	
-    <!-- ================================= 
+	<!-- ================================= 
           target: test              
          ================================= -->
-    <target name="test" depends="build" description="run all tests">
-        <mkdir dir="${testdir}/chunk"/>
-        
-    </target>
+	<property name="test-report.dir" value="${basedir}/test-results"/>
+		
+	<target name="test" depends="distjar" description="run all tests">
+		<echo>test-report.dir is ${test-report.dir}</echo>
+
+		<junit fork="no">
+			<sysproperty key="java.security.policy" value="${srcdir}/de/harper_hall/wotan/broker/broker.policy"/>
+			<classpath>
+				<pathelement path="${basedir}/pf.jar"/>
+				<pathelement path="${commonscollectiondir}/commons-collections-3.1.jar"/>
+		    	<pathelement path="${log4j.jar}"/>
+				<pathelement path="${junitdir}/junit.jar"/>
+				<pathelement path="${hyadesdir}/common.runner.jar"/>
+				<pathelement path="${bindir}"/>
+			</classpath>
+			<formatter type="xml"/>
+			<batchtest todir="${test-report.dir}">
+				<fileset dir="${bindir}">
+					<include name="**/*Test.class"/>
+					<exclude name="**/AllOfHarperHallTest.class"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
 
 
 

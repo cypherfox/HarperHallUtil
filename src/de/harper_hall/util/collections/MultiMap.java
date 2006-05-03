@@ -5,6 +5,9 @@
  * 
  * $Id$
  * $Log$
+ * Revision 1.2  2006/05/03 17:19:45  behnke_l
+ * junit-target in build.xml
+ *
  * Revision 1.1  2005/11/15 17:52:52  behnke_l
  * files added
  *
@@ -26,8 +29,8 @@ import java.util.Set;
  */
 public interface MultiMap<K,V> extends Map<K,V>{
   
-  /* TODO: das gesamte entrySet()/Entry Interface müßte noch mal auf MultiMap angepasst werden. Dann muß aber die Abhängigkeit
-   * zu Map gelößt werden
+  /* TODO: das gesamte entrySet()/Entry Interface mÃ¼ÃŸte noch mal auf MultiMap angepasst werden. Dann muÃŸ aber die AbhÃ¤ngigkeit
+   * zu Map gelÃ¶ÃŸt werden
    * 
    */
   
