@@ -4,15 +4,30 @@
 
 	<property name="srcdir" value="${basedir}/src"/>
 	<property name="bindir" value="${basedir}/bin"/>        
+	<property name="instrumented.bindir" value="${basedir}/instrumented.bin"/>        
 	<property name="testdir" value="/tmp/HarperHallUtil"/>        
-	
+	<property name="coverage.dir" value="${basedir}/coverage"/>        
+
 	<property name="extlib.dir" value="/opt/java_stuff"/>
 	<property name="hyadesdir" value="${extlib.dir}/eclipse-3.1/plugins/org.eclipse.hyades.test.tools.core_4.1.0"/>
 	<property name="junitdir" value="${extlib.dir}/eclipse-3.1/plugins/org.junit_3.8.1"/>
 	<property name="commonscollectiondir" value="${extlib.dir}/commons-collections-3.1/"/> 
 	<property name="log4j.jar" value="${extlib.dir}/logging-log4j-1.2.13/dist/lib/log4j-1.2.13.jar}" />
 	<property name="getopt.jar" value="${extlib.dir}/java-getopt-1.0.12/build/lib/gnu.getopt.jar"/>
-	
+	<property name="cobertura.jar" value="${extlib.dir}/cobertura-1.8/cobertura.jar"/>
+
+    <path id="classpath">
+    	<pathelement path="${basedir}/pf.jar"/>
+		<pathelement path="${commonscollectiondir}/commons-collections-3.1.jar"/>
+    	<pathelement path="${log4j.jar}"/>
+    	<pathelement path="${junitdir}/junit.jar"/>
+		<pathelement path="${hyadesdir}/common.runner.jar"/>
+    	<pathelement path="${getopt.jar}"/>
+    	<pathelement path="${cobertura.jar}"/>
+	</path>
+
+	<taskdef classpathref="classpath" resource="tasks.properties"/>
+
 	<!-- ================================= 
           target: init              
          ================================= -->
@@ -25,7 +40,9 @@
          ================================= -->
     <target name="prepare" depends="init" description="--> set directories, basic files, etc.">
         <mkdir dir="${bindir}"/>
+    	<mkdir dir="${instrumented.bindir}"/>
 		<mkdir dir="${test-report.dir}"/>
+    	<mkdir dir="${coverage.dir}"/>
     </target>
 
 
@@ -49,7 +66,6 @@
           target: build              
          ================================= -->
     <target name="build" depends="prepare" description="incremtaly build all elements">
-    	<antcall target="compile" />        
     	<antcall target="distjar" />        
     </target>
 
@@ -57,8 +73,11 @@
     <!-- ================================= 
           target: docs              
          ================================= -->
-    <target name="docs" depends="prepare" description="--> create all documentation">
-        
+	<target name="coverage_java" depends="test_java">
+	    <cobertura-report format="html" srcdir="${srcdir}" destdir="${coverage.dir}"/>
+	</target>
+
+    <target name="docs" depends="prepare,coverage_java" description="--> create all documentation">
     </target>
 
 
@@ -77,11 +96,22 @@
 
 	
 	<!-- ================================= 
+          target: instrument java              
+         ================================= -->
+	<target name="instrument_java">
+		<cobertura-instrument todir="${instrumented.bindir}">
+		    <fileset dir="${bindir}">
+		        <include name="**/*.class"/>
+		    </fileset>
+		</cobertura-instrument>
+	</target>
+
+	<!-- ================================= 
           target: test              
          ================================= -->
 	<property name="test-report.dir" value="${basedir}/test-results"/>
 		
-	<target name="test" depends="distjar" description="run all tests">
+	<target name="test_java" depends="compile_java,instrument_java" description="run all tests">
 		<echo>test-report.dir is ${test-report.dir}</echo>
 
 		<junit fork="no">
@@ -93,6 +123,7 @@
 				<pathelement path="${junitdir}/junit.jar"/>
 				<pathelement path="${hyadesdir}/common.runner.jar"/>
 		    	<pathelement path="${getopt.jar}"/>
+				<pathelement path="${instrumented.bindir}"/>
 				<pathelement path="${bindir}"/>
 			</classpath>
 			<formatter type="xml"/>
@@ -111,15 +142,7 @@
           target: compile_java 
 	          compile all java classes                      
          - - - - - - - - - - - - - - - - - -->
-    <target name="compile_java" depends="init">
-	    <path id="classpath">
-	    	<pathelement path="${basedir}/pf.jar"/>
-			<pathelement path="${commonscollectiondir}/commons-collections-3.1.jar"/>
-	    	<pathelement path="${log4j.jar}"/>
-	    	<pathelement path="${junitdir}/junit.jar"/>
-			<pathelement path="${hyadesdir}/common.runner.jar"/>
-	    	<pathelement path="${getopt.jar}"/>
-		</path>
+    <target name="compile_java" depends="prepare">
 
 	    <echo message="srcdir: ${srcdir}"/>
     	<echo message="bindir: ${bindir}"/>
