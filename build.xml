@@ -154,6 +154,7 @@
             destdir="${bindir}"    		
             classpathref="classpath"
              debug="on"
+    		debuglevel="lines,vars,source"
     	/>            
 
     </target>
