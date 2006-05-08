@@ -14,6 +14,8 @@
 	<property name="commonscollectiondir" value="${extlib.dir}/commons-collections-3.1/"/> 
 	<property name="log4j.jar" value="${extlib.dir}/logging-log4j-1.2.13/dist/lib/log4j-1.2.13.jar}" />
 	<property name="getopt.jar" value="${extlib.dir}/java-getopt-1.0.12/build/lib/gnu.getopt.jar"/>
+	<property name="asm.jar" value="${extlib.dir}/cobertura-1.8/lib/asm-2.2.1.jar"/>
+	<property name="jakarta-oro.jar" value="${extlib.dir}/cobertura-1.8/lib/jakarta-oro-2.0.8.jar"/>
 	<property name="cobertura.jar" value="${extlib.dir}/cobertura-1.8/cobertura.jar"/>
 
     <path id="classpath">
@@ -23,6 +25,8 @@
     	<pathelement path="${junitdir}/junit.jar"/>
 		<pathelement path="${hyadesdir}/common.runner.jar"/>
     	<pathelement path="${getopt.jar}"/>
+    	<pathelement path="${asm.jar}"/>
+    	<pathelement path="${jakarta-oro.jar}"/>
     	<pathelement path="${cobertura.jar}"/>
 	</path>
 
