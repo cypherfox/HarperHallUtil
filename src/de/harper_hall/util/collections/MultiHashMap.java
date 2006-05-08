@@ -16,8 +16,6 @@
  */
 package de.harper_hall.util.collections;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +24,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import org.apache.commons.collections.iterators.EmptyIterator;
 
