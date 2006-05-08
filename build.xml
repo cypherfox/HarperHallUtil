@@ -78,7 +78,8 @@
           target: docs              
          ================================= -->
 	<target name="coverage_java" depends="test_java">
-	    <cobertura-report format="html" srcdir="${srcdir}" destdir="${coverage.dir}"/>
+	    <cobertura-report format="html" srcdir="${srcdir}" 
+	    	datafile="${basedir}/cobertura.ser" destdir="${coverage.dir}"/>
 	</target>
 
     <target name="docs" depends="prepare,coverage_java" description="--> create all documentation">
@@ -103,7 +104,7 @@
           target: instrument java              
          ================================= -->
 	<target name="instrument_java">
-		<cobertura-instrument todir="${instrumented.bindir}">
+		<cobertura-instrument todir="${instrumented.bindir}" datafile="${basedir}/cobertura.ser">
 		    <fileset dir="${bindir}">
 		        <include name="**/*.class"/>
 		    </fileset>
