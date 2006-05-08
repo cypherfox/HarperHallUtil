@@ -86,7 +86,7 @@
          ================================= -->
     <target name="all"  description="--> description">
     	<antcall target="build" />        
-		<antcall target="test"/>
+		<antcall target="test_java"/>
     	<antcall target="docs" />        
     	<antcall target="srcjar" />        
 
@@ -107,7 +107,7 @@
 	</target>
 
 	<!-- ================================= 
-          target: test              
+          target: test_java              
          ================================= -->
 	<property name="test-report.dir" value="${basedir}/test-results"/>
 		
