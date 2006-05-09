@@ -12,8 +12,8 @@
 	<property name="hyadesdir" value="${extlib.dir}/eclipse-3.1/plugins/org.eclipse.hyades.test.tools.core_4.1.0"/>
 	<property name="junitdir" value="${extlib.dir}/junit3.8.1"/>
 	<property name="commonscollectiondir" value="${extlib.dir}/commons-collections-3.1/"/> 
-	<property name="log4j.jar" value="${extlib.dir}/logging-log4j-1.2.13/dist/lib/log4j-1.2.13.jar" />
 	<property name="getopt.jar" value="${extlib.dir}/java-getopt-1.0.12/build/lib/gnu.getopt.jar"/>
+	<property name="log4j.jar" value="${extlib.dir}/logging-log4j-1.2.13/dist/lib/log4j-1.2.13.jar" />
 	<property name="asm.jar" value="${extlib.dir}/cobertura-1.8/lib/asm-2.2.1.jar"/>
 	<property name="jakarta-oro.jar" value="${extlib.dir}/cobertura-1.8/lib/jakarta-oro-2.0.8.jar"/>
 	<property name="cobertura.jar" value="${extlib.dir}/cobertura-1.8/cobertura.jar"/>
@@ -60,8 +60,7 @@
     <!-- ================================= 
           target: compile              
          ================================= -->
-    <target name="compile" depends="prepare" description="compile all code">
-    	<antcall target="compile_java" />
+    <target name="compile" depends="prepare,compile_java" description="compile all code">
     </target>
 
 
@@ -176,4 +175,8 @@
         <jar jarfile="harperHallUtil-src.jar" includes="**" basedir="${srcdir}"/>
     </target>
 	
+	<target name="publish" depends="distjar,srcjar" description="write the jars to a directory for other projects to see">
+		<copy file="${basedir}/harperHallUtil.jar" todir="$(artifact.lib)"/>
+		<copy file="${basedir}/harperHallUtil-src.jar" todir="$(artifact.lib)"/>
+	</target>
 </project> 
