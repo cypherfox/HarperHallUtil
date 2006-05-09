@@ -112,6 +112,7 @@
 		<cobertura-instrument todir="${instrumented.bindir}" datafile="${basedir}/cobertura.ser">
 		    <fileset dir="${bindir}">
 		        <include name="**/*.class"/>
+		    	<exclude name="**/MultiHashMap$1.class"/>
 		    </fileset>
 		</cobertura-instrument>
 		<echo>copertura instrument end</echo>
@@ -127,7 +128,7 @@
 		<echo>copertura data file is ${basedir}/cobertura.ser</echo>
 		<junit fork="no">
 			<sysproperty key="java.security.policy" value="${srcdir}/de/harper_hall/wotan/broker/broker.policy"/>
-			<sysproperty key="net.sourceforge.cobertura.datafile" file="${basedir}/cobertura.ser" />
+			<sysproperty key="net.sourceforge.cobertura.datafile" value="${basedir}/cobertura.ser" />
 			<classpath>
 				<pathelement path="${commonscollectiondir}/commons-collections-3.1.jar"/>
 		    	<pathelement path="${log4j.jar}"/>
@@ -141,12 +142,8 @@
 				<pathelement path="${bindir}"/>
 			</classpath>
 			<formatter type="xml"/>
-			<batchtest todir="${test-report.dir}">
-				<fileset dir="${bindir}">
-					<include name="**/*Test.class"/>
-					<exclude name="**/AllOfHarperHallTest.class"/>
-				</fileset>
-			</batchtest>
+			<test name="de.harper_hall.util.tests.AllOfHarperHallUtilTests"
+				todir="${test-report.dir}"/>
 		</junit>
 	</target>
 
