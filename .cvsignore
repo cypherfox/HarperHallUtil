@@ -1,3 +1,7 @@
 harperHallUtil.jar
 harperHallUtil-src.jar
+coverage
+instrumented.bin
+test-results
+cobertura.ser
 bin

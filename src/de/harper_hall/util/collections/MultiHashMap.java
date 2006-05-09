@@ -13,6 +13,13 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *  
+ * $Id$
+ * $Log$
+ * Revision 1.4  2006/05/09 11:22:44  behnke_l
+ * clean up warnings
+ *
+ * 
  */
 package de.harper_hall.util.collections;
 
@@ -105,12 +112,17 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
      * 
      * @param mapToCopy  a Map to copy
      */
+
+    @SuppressWarnings("unchecked")
     public MultiHashMap(Map mapToCopy) {
+      
       data =new HashMap<K,Collection<V>>((int) (mapToCopy.size() * 1.4f));
       if (mapToCopy instanceof MultiMap) {
-        for (Iterator it = mapToCopy.entrySet().iterator(); it.hasNext();) {
-          Map.Entry entry = (Map.Entry) it.next();
-          Collection<V> coll = (Collection<V>) entry.getValue();
+        Map<K,Collection<V>> copyMap = (Map<K,Collection<V>>)mapToCopy;
+        
+        for (Iterator<Map.Entry<K,Collection<V>>> it = copyMap.entrySet().iterator(); it.hasNext();) {
+          Map.Entry<K,Collection<V>> entry = it.next();
+          Collection<V> coll = entry.getValue();
           Collection<V> newColl = createCollection(coll);
           data.put((K)entry.getKey(), newColl);
         }
@@ -329,8 +341,9 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
      *
      * @return a collection view of the values contained in this map
      */
-    public Collection values() {
-        Collection vs = values;
+    @SuppressWarnings("unchecked")
+    public Collection<V> values() {
+        Collection<V> vs = values;
         return (vs != null ? vs : (values = new Values()));
     }
 
@@ -409,9 +422,9 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
      * 
      * @return the cloned map
      */
+    @SuppressWarnings("unchecked")
     public Object clone() {
         MultiHashMap<K,V> cloned = null;
-        HashMap<K,V> result = null;
         try { 
           cloned = (MultiHashMap<K,V>) super.clone();
         } catch (CloneNotSupportedException e) { 
@@ -449,7 +462,6 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
      * @see de.harper_hall.util.collections.MultiMap#mergeAllSet(java.util.Map)
      */
     public void mergeAllSet(Map<? extends K, Set<? extends V>> t) throws UnsupportedOperationException, ClassCastException, IllegalArgumentException, NullPointerException {
-      // TODO Auto-generated method stub
       throw new UnsupportedOperationException();
     }
 
@@ -457,7 +469,6 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
      * @see de.harper_hall.util.collections.MultiMap#mergeAllSingle(java.util.Map)
      */
     public void mergeAllSingle(Map<? extends K, ? extends V> t) throws UnsupportedOperationException, ClassCastException, IllegalArgumentException, NullPointerException {
-      // TODO Auto-generated method stub
       throw new UnsupportedOperationException();
     }
 
@@ -465,7 +476,6 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
      * @see de.harper_hall.util.collections.MultiMap#putAllSet(java.util.Map)
      */
     public void putAllSet(Map<? extends K, Set<? extends V>> t) throws UnsupportedOperationException, ClassCastException, IllegalArgumentException, NullPointerException {
-      // TODO Auto-generated method stub
       throw new UnsupportedOperationException();
     }
 
@@ -473,7 +483,6 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
      * @see de.harper_hall.util.collections.MultiMap#putAllSingle(java.util.Map)
      */
     public void putAllSingle(Map<? extends K, ? extends V> t) throws UnsupportedOperationException, ClassCastException, IllegalArgumentException, NullPointerException {
-      // TODO Auto-generated method stub
       throw new UnsupportedOperationException();
     }
 
@@ -497,6 +506,7 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
     /**
      * @see java.util.HashMap#remove(java.lang.Object)
      */
+    @SuppressWarnings("unchecked")
     public V remove(Object key) {
       V retval;
       Iterator iter;
@@ -515,6 +525,7 @@ public class MultiHashMap<K,V>  implements MultiMap<K,V> {
     /**
      * @see java.util.Map#putAll(java.util.Map)
      */
+    @SuppressWarnings("unchecked")
     public void putAll(Map<? extends K, ? extends V> t) {
       Iterator iter;
       for(iter = t.entrySet().iterator(); iter.hasNext();){
