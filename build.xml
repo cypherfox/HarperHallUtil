@@ -125,7 +125,7 @@
 	<target name="test_java" depends="compile_java,instrument_java" description="run all tests">
 		<echo>test-report.dir is ${test-report.dir}</echo>
 		<echo>copertura data file is ${basedir}/cobertura.ser</echo>
-		<junit fork="no">
+		<junit fork="yes">
 			<sysproperty key="java.security.policy" value="${srcdir}/de/harper_hall/wotan/broker/broker.policy"/>
 			<sysproperty key="net.sourceforge.cobertura.datafile" value="${basedir}/cobertura.ser" />
 			<classpath>
