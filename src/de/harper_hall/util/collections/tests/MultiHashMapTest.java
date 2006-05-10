@@ -63,6 +63,7 @@ public class MultiHashMapTest extends HyadesTestCase {
   throws Exception
   {
     MultiHashMap<String,String> mmap = new MultiHashMap<String,String>();
+    System.err.println("Runnng MultiHashMapTest");
     
     mmap.put("1","one");
     mmap.put("2","two");

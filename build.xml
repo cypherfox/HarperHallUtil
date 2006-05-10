@@ -112,6 +112,7 @@
 		    <fileset dir="${bindir}">
 		        <include name="**/*.class"/>
 		    	<exclude name="**/MultiHashMap$1.class"/>
+		    	<exclude name="**/*Test.class"/>
 		    </fileset>
 		</cobertura-instrument>
 		<echo>copertura instrument end</echo>
