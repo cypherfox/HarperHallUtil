@@ -8,6 +8,7 @@ import org.eclipse.hyades.test.common.junit.HyadesTestSuite;
 import de.harper_hall.util.collections.tests.MultiHashMapTest;
 import de.harper_hall.util.math.tests.VectorTest;
 import de.harper_hall.util.nio.tests.ByteBufferHelperTest;
+import de.harper_hall.util.math.tests.ByteHelperTest;
 
 /**
  * Generated code for the test suite <b>AllOfHarperHallUtilTests</b> located at
@@ -42,6 +43,9 @@ public class AllOfHarperHallUtilTests extends HyadesTestCase {
   
       allOfHarperHallUtilTests.addTest(((HyadesTestSuite) ByteBufferHelperTest
           .suite()).setTestInvocationId("E999C5CEB9783A2E8533CFE05CCC11DA"));
+  
+      allOfHarperHallUtilTests.addTest(((HyadesTestSuite) ByteHelperTest.suite())
+          .setTestInvocationId("CA6FFE00591C665FE5DD5550E40811DA"));
   
       return allOfHarperHallUtilTests;
     }
