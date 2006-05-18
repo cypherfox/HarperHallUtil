@@ -180,8 +180,8 @@
 		<echo>artifact.lib: ${artifact.lib}</echo>
 		<mkdir dir="${artifact.lib}"/>
 		<echo>trying to copy ${basedir}/harperHallUtil.jar</echo>
-		<copy failonerror="true" verbose="true" file="${basedir}/harperHallUtil.jar" todir="$(artifact.lib)"/>
+		<flopy failonerror="true" verbose="true" file="${basedir}/harperHallUtil.jar" todir="$(artifact.lib)"/>
 		<copy verbose="true" file="${basedir}/harperHallUtil-src.jar" todir="$(artifact.lib)"/>
-		<echo>got here</echo>
+		<echo>got here (tick)</echo>
 	</target>
 </project> 
