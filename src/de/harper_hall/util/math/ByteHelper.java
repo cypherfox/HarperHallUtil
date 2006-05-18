@@ -5,6 +5,9 @@
  * 
  * $Id$
  * $Log$
+ * Revision 1.4  2006/05/18 16:31:28  behnke_l
+ * auf Shift und bit-mask umgestellt
+ *
  * Revision 1.3  2006/05/16 18:11:36  behnke_l
  * lockdown
  *
@@ -105,15 +108,15 @@ public class ByteHelper {
   public static byte[] toByteArray(int i,boolean little_endian){
     byte[] retval = new byte[4];
     if(little_endian){
-      retval[3]= Integer.valueOf(i%256).byteValue() ; i/=256;
-      retval[2]= Integer.valueOf(i%256).byteValue() ; i/=256;
-      retval[1]= Integer.valueOf(i%256).byteValue() ; i/=256;
-      retval[0]= Integer.valueOf(i%256).byteValue() ;
+      retval[0]= (byte)(i >>> 24);
+      retval[1]= (byte)(i >>> 16);
+      retval[2]= (byte)(i >>>  8);
+      retval[3]= (byte)(i >>>  0);
     } else {
-      retval[0]= Integer.valueOf(i%256).byteValue() ; i/=256;
-      retval[1]= Integer.valueOf(i%256).byteValue() ; i/=256;
-      retval[2]= Integer.valueOf(i%256).byteValue() ; i/=256;
-      retval[3]= Integer.valueOf(i%256).byteValue() ;
+      retval[3]= (byte)(i >>> 24);
+      retval[2]= (byte)(i >>> 16);
+      retval[1]= (byte)(i >>>  8);
+      retval[0]= (byte)(i >>>  0);
     }
     return retval;
     }
@@ -133,23 +136,23 @@ public class ByteHelper {
   public static byte[] toByteArray(long i,boolean little_endian){
     byte[] retval = new byte[8];
     if(little_endian){
-      retval[7]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[6]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[5]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[4]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[3]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[2]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[1]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[0]= Long.valueOf(i%256).byteValue() ;
+      retval[0] = (byte)(i >>> 56);
+      retval[1] = (byte)(i >>> 48);
+      retval[2] = (byte)(i >>> 40);
+      retval[3] = (byte)(i >>> 32);
+      retval[4] = (byte)(i >>> 24);
+      retval[5] = (byte)(i >>> 16);
+      retval[6] = (byte)(i >>>  8);
+      retval[7] = (byte)(i >>>  0);
     } else {
-      retval[0]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[1]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[2]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[3]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[4]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[5]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[6]= Long.valueOf(i%256).byteValue() ; i/=256;
-      retval[7]= Long.valueOf(i%256).byteValue() ;
+      retval[7] = (byte)(i >>> 56);
+      retval[6] = (byte)(i >>> 48);
+      retval[5] = (byte)(i >>> 40);
+      retval[4] = (byte)(i >>> 32);
+      retval[3] = (byte)(i >>> 24);
+      retval[2] = (byte)(i >>> 16);
+      retval[1] = (byte)(i >>>  8);
+      retval[0] = (byte)(i >>>  0);
     }
     return retval;
   }
@@ -158,11 +161,15 @@ public class ByteHelper {
    * @param i
    * @return a byte array containing the integer in little endian two-complement representation
    */
-  public static byte[] toByteArray(byte i){return null;}
+  public static byte[] toByteArray(byte i){return toByteArray(i,true);}
   /**
    * @param i
    * @param little_endian if set to true the representation will be little endian, big endian otherwise.
    * @return a byte array containing the integer in little endian two-complement representation
    */
-  public static byte[] toByteArray(byte i,boolean little_endian){return null;}
+  public static byte[] toByteArray(byte i,boolean little_endian){
+    byte[] retval = new byte[1];
+    retval[0]=i;
+    return retval;
+  }
 }
