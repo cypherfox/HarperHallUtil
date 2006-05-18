@@ -177,6 +177,7 @@
     </target>
 	
 	<target name="publish" depends="distjar,srcjar" description="write the jars to a directory for other projects to see">
+		<echo>artifact.lib: ${artifact.lib}</echo>
 		<copy file="${basedir}/harperHallUtil.jar" todir="$(artifact.lib)"/>
 		<copy file="${basedir}/harperHallUtil-src.jar" todir="$(artifact.lib)"/>
 	</target>
