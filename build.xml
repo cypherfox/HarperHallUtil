@@ -181,5 +181,6 @@
 		<mkdir dir="${artifact.lib}"/>
 		<copy verbose="true" file="${basedir}/harperHallUtil.jar" todir="$(artifact.lib)"/>
 		<copy verbose="true" file="${basedir}/harperHallUtil-src.jar" todir="$(artifact.lib)"/>
+		<echo>got here</echo>
 	</target>
 </project> 
