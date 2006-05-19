@@ -179,9 +179,7 @@
 	<target name="publish" depends="distjar,srcjar" description="write the jars to a directory for other projects to see">
 		<echo>artifact.lib: ${artifact.lib}</echo>
 		<mkdir dir="${artifact.lib}"/>
-		<echo>trying to copy ${basedir}/harperHallUtil.jar</echo>
-		<copy failonerror="true" verbose="true" file="${basedir}/harperHallUtil.jar" todir="$(artifact.lib)"/>
-		<copy verbose="true" file="${basedir}/harperHallUtil-src.jar" todir="$(artifact.lib)"/>
-		<echo>got here (tick)</echo>
+		<copy failonerror="true" verbose="true" file="${basedir}/harperHallUtil.jar" todir="${artifact.lib}"/>
+		<copy verbose="true" file="${basedir}/harperHallUtil-src.jar" todir="${artifact.lib}"/>
 	</target>
 </project> 
