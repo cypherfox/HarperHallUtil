@@ -5,6 +5,9 @@
  * 
  * $Id$
  * $Log$
+ * Revision 1.5  2006/05/31 13:10:28  behnke_l
+ * correct implementation an implement full tests for longValue. Some additional little tools
+ *
  * Revision 1.4  2006/05/18 16:31:28  behnke_l
  * auf Shift und bit-mask umgestellt
  *
@@ -75,19 +78,19 @@ public class ByteHelper {
     int i,pos;
     long ret=0;
     
-    if(length>4) throw new NumberFormatException("Max length for int value is 4 byte");
+    if(length>8) throw new NumberFormatException("Max length for long value is 8 byte");
     
     if(little_endian){
-      pos  = offset;
-      for(i=0;i<length;i++,pos++){
-        ret*=256;
-        ret+=arr[pos];
-      }
-    }else{
       pos  = offset+length-1;
       for(i=0;i<length;i++,pos--){
-        ret*=256;
-        ret+=arr[pos];
+        long stepval = (long)(arr[pos] & 255)<<(8*i);
+        ret+= stepval;
+      }
+    }else {
+      pos  = offset;
+      for(i=0;i<length;i++,pos++){
+        long stepval = (long)(arr[pos] & 255)<<(8*i); 
+        ret+= stepval;
       }
     }
       

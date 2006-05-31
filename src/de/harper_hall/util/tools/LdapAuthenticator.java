@@ -5,6 +5,9 @@
  * 
  * $Id$
  * $Log$
+ * Revision 1.2  2006/05/31 13:10:28  behnke_l
+ * correct implementation an implement full tests for longValue. Some additional little tools
+ *
  * Revision 1.1  2006/05/03 17:19:45  behnke_l
  * junit-target in build.xml
  *
@@ -22,7 +25,6 @@ import javax.naming.AuthenticationException;
 import javax.naming.AuthenticationNotSupportedException;
 import javax.naming.Context;
 import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 
 import de.harper_hall.util.ldap.LdapURLStreamHandler;

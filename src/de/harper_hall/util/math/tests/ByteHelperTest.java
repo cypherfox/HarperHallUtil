@@ -1,5 +1,7 @@
 package de.harper_hall.util.math.tests;
 
+import java.io.DataInputStream;
+
 import junit.framework.Test;
 
 import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;
@@ -30,13 +32,17 @@ public class ByteHelperTest extends HyadesTestCase {
       byteHelperTest.setArbiter(DefaultTestArbiter.INSTANCE)
           .setId("CA6FFE00591C665FA466AFE0E3E511DA");
   
-      byteHelperTest.addTest(new ByteHelperTest("testByteToSigned")
-          .setId("CA6FFE00591C665FA2A5FF30E40811DA")
-          .setTestInvocationId("CA6FFE00591C665FB015C920E40811DA"));
-  
       byteHelperTest.addTest(new ByteHelperTest("testToByteArray")
           .setId("CA6FFE00591C665F02A575C0E3FD11DA")
-          .setTestInvocationId("CA6FFE00591C665F47A86420E3FD11DA"));
+          .setTestInvocationId("DFEDB4C6012A56FC3C92CB50F08911DA"));
+  
+      byteHelperTest.addTest(new ByteHelperTest("testByteToSigned")
+          .setId("CA6FFE00591C665FB407EAE0E40811DA")
+          .setTestInvocationId("DFEDB4C6012A56FC401143B0F08911DA"));
+  
+      byteHelperTest.addTest(new ByteHelperTest("testLongValueRanges")
+          .setId("DFEDB4C6012A56FC1B3031A0F08911DA")
+          .setTestInvocationId("DFEDB4C6012A56FC42C73BF0F08911DA"));
   
       return byteHelperTest;
     }
@@ -134,6 +140,68 @@ public class ByteHelperTest extends HyadesTestCase {
     assertTrue("expected -127, was "+ ByteHelper.byteToSigned(-127), -127 == ByteHelper.byteToSigned(-127));
     assertTrue("expected -128, was "+ ByteHelper.byteToSigned( 128), -128 == ByteHelper.byteToSigned(128));
     assertTrue("expected   -1, was "+ ByteHelper.byteToSigned( 255),   -1 == ByteHelper.byteToSigned(255));
+  }
+
+  /**
+  * testLongValueRanges
+  * @throws Exception
+  */
+  public void testLongValueRanges()
+  throws Exception
+  {
+    byte[] val_arr = {1,2,3,4,5,6,7,8,9,10};
+    long retval;
+    
+    retval= ByteHelper.longValue(val_arr,0,1,true);
+    assertEquals("Incorrect value",1,retval);
+
+    retval= ByteHelper.longValue(val_arr,0,1,false);
+    assertEquals("Incorrect value",1,retval);
+    
+    retval= ByteHelper.longValue(val_arr,0,2,false);
+    assertEquals("Incorrect value",1+(256*2),retval);
+
+    retval= ByteHelper.longValue(val_arr,0,2,true);
+    assertEquals("Incorrect value",(256*1)+2,retval);
+
+    retval= ByteHelper.longValue(val_arr,0,3,false);
+    assertEquals("Incorrect value",1+(256*2)+(256*256*3),retval);
+
+    retval= ByteHelper.longValue(val_arr,0,3,true);
+    assertEquals("Incorrect value",(256*256*1)+(256*2)+3,retval);
+
+    retval= ByteHelper.longValue(val_arr,0,4,false);
+    assertEquals("Incorrect value",1+(256*2)+(256*256*3)+(256*256*256*4),retval);
+
+    retval= ByteHelper.longValue(val_arr,0,4,true);
+    assertEquals("Incorrect value",(256*256*256*1)+(256*256*2)+(256*3)+4,retval);
+
+    retval= ByteHelper.longValue(val_arr,0,5,false);
+    assertEquals("Incorrect value",(long)(1+(256*2)+(256*256*3)+(256*256*256*4)+((long)256*256*256*256*5)),retval);
+
+    retval= ByteHelper.longValue(val_arr,0,5,true);
+    assertEquals("Incorrect value",(long)((long)256*256*256*256*1)+(256*256*256*2)+(256*256*3)+(256*4)+5,retval);
+
+    retval= ByteHelper.longValue(val_arr,0,8,false);
+    assertEquals("Incorrect value",
+                 (long)578437695752307201L,
+                 retval);
+
+    retval= ByteHelper.longValue(val_arr,0,8,true);
+    assertEquals("Incorrect value",
+                 72623859790382856L,
+                 retval);
+    
+    try{
+      retval= ByteHelper.longValue(val_arr,0,9,false);
+      fail("longValue should only accept a maximum lenght of 8");
+    } catch(NumberFormatException nfe){}
+  
+    try{
+      retval= ByteHelper.longValue(val_arr,0,9,true);
+      fail("longValue should only accept a maximum lenght of 8");
+    } catch(NumberFormatException nfe){}
+
   }
 
 }
