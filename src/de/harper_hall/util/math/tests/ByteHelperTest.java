@@ -1,7 +1,5 @@
 package de.harper_hall.util.math.tests;
 
-import java.io.DataInputStream;
-
 import junit.framework.Test;
 
 import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;

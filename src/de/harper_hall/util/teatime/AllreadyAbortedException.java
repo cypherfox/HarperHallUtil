@@ -5,6 +5,9 @@
  * 
  * $Id$
  * $Log$
+ * Revision 1.2  2006/09/19 13:42:08  behnke_l
+ * fix warnings
+ *
  * Revision 1.1  2006/05/03 17:19:45  behnke_l
  * junit-target in build.xml
  *
@@ -13,7 +16,12 @@ package de.harper_hall.util.teatime;
 
 public class AllreadyAbortedException extends Exception {
 
-  public AllreadyAbortedException() {
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3372625280132763954L;
+
+public AllreadyAbortedException() {
     super();
     // TODO Auto-generated constructor stub
   }
