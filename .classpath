@@ -8,7 +8,7 @@
 			<attribute value="file:/opt/java_stuff/commons-collections-3.1/docs/apidocs/" name="javadoc_location"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/sage/src/jgetopt/build/lib/gnu.getopt.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/TPTP Test"/>
+	<classpathentry kind="lib" path="lib/gnu.getopt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
