@@ -6,6 +6,9 @@ Anotation for each role and the operation (one for C.R.U.D.) he may do
 Entity may provide method of signature 'public boolean isOwner(String owner)', that allows
 testing if a given user is the owner of the entity.
 
+FEAnnotate is not a security system! It will include the nessecary manipulation fields 
+and methods in order to provide the interface elements required by the user.
+
 @Entity
 @FeaAll({"root"})
 class MyEntity (
