@@ -35,7 +35,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * This implementation O(log(n)*n) for time and O(n) for space
+ * This implementation uses a sorted cache to speed up lookups. Therefore it is usefull
+ * to do all inserts, then all lookups. This will improve the time requirements towards
+ * O(log(n)) for lookups. If calls to the put method are evenly mixed with calls to get,
+ * the performance will degrade to O(n*log(n)) for time. The cost for space are allways
+ * O(n).
  * 
  * @author sage
  *
@@ -94,7 +98,7 @@ public class IntervalArrayHashMap<K extends Comparable, V> implements IntervalMa
 	}
 
 	/**
-	 * implementation may take up to O(n) to find value
+	 * implementation may take up to O(log(n)) to find value
 	 * 
 	 * TODO: synchronization
 	 * @see java.util.Map#get(java.lang.Object)
