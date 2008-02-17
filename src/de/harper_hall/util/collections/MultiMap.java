@@ -29,8 +29,8 @@ import java.util.Set;
  */
 public interface MultiMap<K,V> extends Map<K,V>{
   
-  /* TODO: das gesamte entrySet()/Entry Interface mÃ¼ÃŸte noch mal auf MultiMap angepasst werden. Dann muÃŸ aber die AbhÃ¤ngigkeit
-   * zu Map gelÃ¶ÃŸt werden
+  /* TODO: das gesamte entrySet()/Entry Interface müßte noch mal auf MultiMap angepasst werden. Dann muß aber die Abhängigkeit
+   * zu Map gelößŸt werden
    * 
    */
   
