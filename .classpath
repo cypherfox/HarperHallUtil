@@ -2,14 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry sourcepath="/opt/java_stuff/commons-collections-3.1/src/java" kind="lib" path="/opt/java_stuff/apache-tomcat-5.5.12/shared/lib/common-collections.jar">
+	<classpathentry kind="lib" path="/opt/java_stuff/apache-tomcat-5.5.12/shared/lib/common-collections.jar" sourcepath="/opt/java_stuff/commons-collections-3.1/src/java">
 		<attributes>
-			<attribute value="file:/opt/java_stuff/commons-collections-3.1/docs/apidocs/" name="javadoc_location"/>
+			<attribute name="javadoc_location" value="file:/opt/java_stuff/commons-collections-3.1/docs/apidocs/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/gnu.getopt.jar"/>
-	<classpathentry kind="var" path="TPTP_TEST_TOOLS/common.runner.jar"/>
-	<classpathentry kind="var" path="TPTP_TEST_TOOLS/java.runner.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3.8.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/TPTP"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
