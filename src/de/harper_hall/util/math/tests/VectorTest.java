@@ -6,6 +6,7 @@ import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;
 import org.eclipse.hyades.test.common.junit.HyadesTestCase;
 import org.eclipse.hyades.test.common.junit.HyadesTestSuite;
 
+import de.harper_hall.util.math.CartesianVector;
 import de.harper_hall.util.math.Vector;
 
 /**
@@ -61,12 +62,12 @@ public class VectorTest extends HyadesTestCase {
     double[] result_arr = {6.0,8.0,10.0};
     int i; boolean ex_caught = false;
 
-    Vector a = new Vector(init_a);
-    Vector b = new Vector(init_b);
-    Vector result;
-    Vector c = new Vector(4);
+    CartesianVector a = new CartesianVector(init_a);
+    Vector b = new CartesianVector(init_b);
+    CartesianVector result;
+    Vector c = new CartesianVector(4);
     
-    result = a.add(b);
+    result = (CartesianVector) a.add(b);
     
     for(i=0;i<3;i++){
       assertEquals(result_arr[i],result.getElement(i));
