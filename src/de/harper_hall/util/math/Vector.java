@@ -79,6 +79,13 @@ public abstract class Vector{
    */
   public abstract Vector add(Vector vec);
   
+  /** subtract vector from this one.
+   * 
+   * @param a a Vector
+   * @return the difference between this vector and a as a vector
+   */
+  public abstract Vector sub(Vector a);
+
   /** normalize the vector
    * 
    * will return a vector with the length of 1, pointing into the same direction as this vector

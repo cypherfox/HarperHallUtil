@@ -18,6 +18,10 @@ package de.harper_hall.util.math;
  */
 public class CartesianVector extends Vector {
   
+  /** create cartesian vector from discrete values
+   * 
+   * @param vals
+   */
   public CartesianVector(double[] vals){
     int i,dimension = vals.length;
     
@@ -25,6 +29,23 @@ public class CartesianVector extends Vector {
     for(i=0;i<dimension;i++){
       values[i] = vals[i];
     }
+  }
+  
+  /** create 3D cartesian vector
+   * 
+   */
+  public CartesianVector(){
+    super();
+  }
+
+  /** create 3D cartesian vector
+   * 
+   */
+  public CartesianVector(double x, double y, double z){
+    super();
+    values[0] = x;
+    values[1] = y;
+    values[2] = z;
   }
   
   /**
@@ -121,13 +142,14 @@ public class CartesianVector extends Vector {
    * @return
    * @throws IndexOutOfBoundsException
    */
-  public Vector sub(CartesianVector a) throws IndexOutOfBoundsException {
+  public Vector sub(Vector a) throws IndexOutOfBoundsException {
     int i;
     int dimension = getDimension();
-    
     if (dimension != a.getDimension())
        throw new IndexOutOfBoundsException("Dimension of vectors differ");
-      
+
+    if(a instanceof SphericalVector) a= new CartesianVector((SphericalVector)a);
+
     Vector retval = new CartesianVector(dimension);
     for(i=0;i<dimension;i++){
       retval.values[i]= this.values[i] - a.values[i];

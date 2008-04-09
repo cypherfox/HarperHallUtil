@@ -58,6 +58,17 @@ public class SphericalVector extends Vector {
   }
 
   /**
+   * 
+   * @return a Vector holding the difference between this one and vec
+   * @see de.harper_hall.util.math.Vector#sub(de.harper_hall.util.math.Vector)
+   */
+  @Override
+  public Vector sub(Vector vec) {
+    CartesianVector a= new CartesianVector(this);
+    return a.add(vec);
+  }
+
+  /**
    * @see de.harper_hall.util.math.Vector#normalize()
    */
   @Override
