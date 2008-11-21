@@ -174,13 +174,13 @@
 
 	    <echo message="srcdir: ${srcdir}"/>
     	<echo message="bindir: ${bindir}"/>
-    	<javac srcdir="${srcdir}"
-            destdir="${bindir}"    		
+    	<javac destdir="${bindir}"    		
             classpathref="classpath"
              debug="on"
-    		debuglevel="lines,vars,source"
-    		excludes="*Test.java"
-    	/>            
+    		debuglevel="lines,vars,source">
+    		<src path="${srcdir}"/>
+    		<exclude name="**/*Test.java"/>
+    	</javac>            
 
     </target>
 
