@@ -19,19 +19,19 @@ import java.util.Map;
 import java.util.Set;
 
 /** 
- * An object that maps keys to one or more objects. It tries to emulate the Map<K,V> interface where possible, 
- * but is not completely compatible.
+ * An object that maps keys to one or more objects. It tries to emulate the 
+ * Map<K,V> interface where possible, but is not completely compatible.
  * 
- * This container can be though of as a collection of Sets, allowing for each key to exist multiple value objects.
- * The objects per key themself are handled by a set, according to the contract of Set
+ * This container can be though of as a collection of Sets, allowing for each 
+ * key to exist multiple value objects. The objects per key themself are 
+ * handled by a set, according to the contract of Set
  * 
  * @author sage
  */
 public interface MultiMap<K,V> extends Map<K,V>{
   
-  /* TODO: das gesamte entrySet()/Entry Interface müßte noch mal auf MultiMap angepasst werden. Dann muß aber die Abhängigkeit
-   * zu Map gelößŸt werden
-   * 
+  /* TODO: the whole entrySet()/Entry Interface should preferably be adapted 
+   * in MultiMap. But that would break the dependency on Map<K,V>
    */
   
   /**
@@ -58,6 +58,7 @@ public interface MultiMap<K,V> extends Map<K,V>{
 
   /**
    * If any of the key-value mappings allready exsist, they are merged with the data from the parameter
+   * 
    * @param t
    * @throws UnsupportedOperationException
    * @throws ClassCastException
