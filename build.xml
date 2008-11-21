@@ -166,9 +166,27 @@
 
     </target>
 
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: compile_no_test 
+	          compile the java classes without the tests                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="compile_no_test" depends="prepare">
+
+	    <echo message="srcdir: ${srcdir}"/>
+    	<echo message="bindir: ${bindir}"/>
+    	<javac srcdir="${srcdir}"
+            destdir="${bindir}"    		
+            classpathref="classpath"
+             debug="on"
+    		debuglevel="lines,vars,source"
+    		excludes="**/*Test.java"
+    	/>            
+
+    </target>
+
 
 	
-    <target name="distjar"  description="Create a jar for the HarperHallUtil project" depends="compile_java">
+    <target name="distjar"  description="Create a jar for the HarperHallUtil project" depends="compile_no_test">
         <jar jarfile="harperHallUtil.jar" includes="**/*.class" excludes="**/*Test.class" basedir="${bindir}">
         </jar>
     </target>
