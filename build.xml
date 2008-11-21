@@ -177,7 +177,7 @@
     	<javac destdir="${bindir}" classpathref="classpath"
              debug="on" debuglevel="lines,vars,source">
     	  <src path="${srcdir}"/>
-    	  <include name="de/harper-hall/util/**/" />
+    	  <include name="de/harper-hall/util/**/*.java" />
     	  <exclude name="de/harper-hall/util/**/*Test.java" />
     	</javac>            
 
