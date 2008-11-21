@@ -179,7 +179,7 @@
             classpathref="classpath"
              debug="on"
     		debuglevel="lines,vars,source"
-    		excludes="**/*Test.java"
+    		excludes="*Test.java"
     	/>            
 
     </target>
