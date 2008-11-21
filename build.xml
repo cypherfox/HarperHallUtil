@@ -174,12 +174,11 @@
 
 	    <echo message="srcdir: ${srcdir}"/>
     	<echo message="bindir: ${bindir}"/>
-    	<javac destdir="${bindir}"    		
-            classpathref="classpath"
-             debug="on"
-    		debuglevel="lines,vars,source">
-    		<src path="${srcdir}"/>
-    		<exclude name="**/*Test.java"/>
+    	<javac destdir="${bindir}" classpathref="classpath"
+             debug="on" debuglevel="lines,vars,source">
+    	  <src path="${srcdir}"/>
+    	  <include name="de/harper-hall/util/**/" />
+    	  <exclude name="de/harper-hall/util/**/*Test.java" />
     	</javac>            
 
     </target>
