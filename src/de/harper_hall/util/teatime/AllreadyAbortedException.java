@@ -23,22 +23,18 @@ public class AllreadyAbortedException extends Exception {
 
 public AllreadyAbortedException() {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   public AllreadyAbortedException(String message) {
     super(message);
-    // TODO Auto-generated constructor stub
   }
 
   public AllreadyAbortedException(String message, Throwable cause) {
     super(message, cause);
-    // TODO Auto-generated constructor stub
   }
 
   public AllreadyAbortedException(Throwable cause) {
     super(cause);
-    // TODO Auto-generated constructor stub
   }
 
 }
