@@ -186,7 +186,7 @@
 
 
 	
-    <target name="distjar"  description="Create a jar for the HarperHallUtil project" depends="compile_no_test">
+    <target name="distjar"  description="Create a jar for the HarperHallUtil project" depends="compile_java">
         <jar jarfile="harperHallUtil.jar" includes="**/*.class" excludes="**/*Test.class" basedir="${bindir}">
         </jar>
     </target>
