@@ -4,30 +4,30 @@
 
 	<property name="srcdir" value="${basedir}/src"/>
 	<property name="bindir" value="${basedir}/bin"/>        
+	<property name="tool.dir" value="${basedir}/lib"/>
 	<property name="instrumented.bindir" value="${basedir}/instrumented.bin"/>        
 	<property name="testdir" value="/tmp/HarperHallUtil"/>        
 	<property name="coverage.dir" value="${basedir}/coverage"/>        
 	<property name="artifact.lib" value="${basedir}" />
 	
 	<property name="extlib.dir" value="/opt/java_stuff"/>
-	<property name="hyadesdir" value="${extlib.dir}/eclipse-3.1/plugins/org.eclipse.hyades.test.tools.core_4.1.0"/>
-	<property name="junitdir" value="${extlib.dir}/junit3.8.1"/>
-	<property name="commonscollectiondir" value="${extlib.dir}/commons-collections-3.1/"/> 
-	<property name="getopt.jar" value="${extlib.dir}/java-getopt-1.0.12/build/lib/gnu.getopt.jar"/>
-	<property name="log4j.jar" value="${extlib.dir}/logging-log4j-1.2.13/dist/lib/log4j-1.2.13.jar" />
 	<property name="asm.jar" value="${extlib.dir}/cobertura-1.8/lib/asm-2.2.1.jar"/>
-	<property name="jakarta-oro.jar" value="${extlib.dir}/cobertura-1.8/lib/jakarta-oro-2.0.8.jar"/>
 	<property name="cobertura.jar" value="${extlib.dir}/cobertura-1.8/cobertura.jar"/>
 
+	<path id="test.classpath">
+	    <pathelement location="/opt/eclipse/plugins/org.junit_3.8.1/junit.jar"/>
+	    <pathelement location="/opt/eclipse/plugins/org.eclipse.hyades.test.tools.core_4.2.3.v200701141614/common.runner.jar" />
+	    <pathelement location="/opt/eclipse/plugins/org.eclipse.hyades.test.tools.core_4.2.3.v200701141614/java.runner.jar" />
+	</path>
+
     <path id="classpath">
-		<pathelement path="${commonscollectiondir}/commons-collections-3.1.jar"/>
-    	<pathelement path="${log4j.jar}"/>
-    	<pathelement path="${junitdir}/junit.jar"/>
-		<pathelement path="${hyadesdir}/common.runner.jar"/>
-    	<pathelement path="${getopt.jar}"/>
+    	<path refid="test.classpath"/>
     	<pathelement path="${asm.jar}"/>
-    	<pathelement path="${jakarta-oro.jar}"/>
     	<pathelement path="${cobertura.jar}"/>
+    	<fileset dir="${tool.dir}">
+    		<include name="**/*.jar"/>
+    		<include name="**/*.zip"/>
+    	</fileset>
 	</path>
 
 	<taskdef classpathref="classpath" resource="tasks.properties"/>
