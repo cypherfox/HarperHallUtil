@@ -11,8 +11,6 @@
 	<property name="artifact.lib" value="${basedir}" />
 	
 	<property name="extlib.dir" value="/opt/java_stuff"/>
-	<property name="asm.jar" value="${extlib.dir}/cobertura-1.8/lib/asm-2.2.1.jar"/>
-	<property name="cobertura.jar" value="${extlib.dir}/cobertura-1.8/cobertura.jar"/>
 
 	<path id="test.classpath">
 	    <pathelement location="/opt/eclipse/plugins/org.junit_3.8.1/junit.jar"/>
@@ -22,14 +20,13 @@
 
     <path id="classpath">
     	<path refid="test.classpath"/>
-    	<pathelement path="${asm.jar}"/>
-    	<pathelement path="${cobertura.jar}"/>
     	<fileset dir="${tool.dir}">
     		<include name="**/*.jar"/>
     		<include name="**/*.zip"/>
     	</fileset>
 	</path>
 
+	<!-- load the cobertura task definition --> 
 	<taskdef classpathref="classpath" resource="tasks.properties"/>
 
 	<!-- ================================= 
@@ -131,14 +128,7 @@
 			<sysproperty key="java.security.policy" value="${srcdir}/de/harper_hall/wotan/broker/broker.policy"/>
 			<sysproperty key="net.sourceforge.cobertura.datafile" value="${basedir}/cobertura.ser" />
 			<classpath>
-				<pathelement path="${commonscollectiondir}/commons-collections-3.1.jar"/>
-		    	<pathelement path="${log4j.jar}"/>
-				<pathelement path="${junitdir}/junit.jar"/>
-				<pathelement path="${hyadesdir}/common.runner.jar"/>
-		    	<pathelement path="${getopt.jar}"/>
-		    	<pathelement path="${asm.jar}"/>
-		    	<pathelement path="${jakarta-oro.jar}"/>
-		    	<pathelement path="${cobertura.jar}"/>
+				<path refid="classpath"/>
 				<pathelement path="${instrumented.bindir}"/>
 				<pathelement path="${bindir}"/>
 			</classpath>
