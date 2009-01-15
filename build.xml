@@ -136,6 +136,7 @@
 			<test name="de.harper_hall.util.tests.AllOfHarperHallUtilTests"
 				todir="${test-report.dir}"/>
 		</junit>
+		<cobertura-report srcdir="${srcdir}" destdir="${test-report.dir}"/>
 	</target>
 
 
