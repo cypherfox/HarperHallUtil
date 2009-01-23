@@ -37,14 +37,14 @@ import java.util.Map;
  * The method get(K key) will return the val for the smallest key that is 
  * greater than or equeal to key.
  * 
- * the type of must implement the Comparable interface.
+ * the type of the contained objects must implement the Comparable interface.
  * 
  * lastForBeyond is set to false by default.
  * 
  * @author sage
  *
  */
-public interface IntervalMap<K extends Comparable, V> extends Map {
+public interface IntervalMap<K extends Comparable<K>, V> extends Map {
 	
 	/**
 	 * 

@@ -35,20 +35,20 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * This implementation uses a sorted cache to speed up lookups. Therefore it is usefull
+ * This implementation uses a sorted cache to speed up lookups. Therefore it is useful
  * to do all inserts, then all lookups. This will improve the time requirements towards
  * O(log(n)) for lookups. If calls to the put method are evenly mixed with calls to get,
- * the performance will degrade to O(n*log(n)) for time. The cost for space are allways
+ * the performance will degrade to O(n*log(n)) for time. The cost for space is always
  * O(n).
  * 
  * @author sage
  *
  */
-public class IntervalArrayHashMap<K extends Comparable, V> implements IntervalMap<K,V> {
+public class IntervalArrayHashMap<K extends Comparable<K>, V> implements IntervalMap<K,V> {
 
-	private List<Comparable> intervals = new ArrayList<Comparable>();
-	private Comparable[] sorted = null;
-	private Map<Comparable,Object> map = new HashMap<Comparable,Object>();
+	private List<Comparable<K>> intervals = new ArrayList<Comparable<K>>();
+	private Comparable<K>[] sorted = null;
+	private Map<Comparable<K>,V> map = new HashMap<Comparable<K>,V>();
 
 	private boolean lastForBeyond = false;
 	
@@ -56,7 +56,7 @@ public class IntervalArrayHashMap<K extends Comparable, V> implements IntervalMa
 	 * @see de.harper_hall.util.collections.IntervalMap#put(java.lang.Comparable, java.lang.Object)
 	 */
 
-	public void put(Comparable key, Object val) {
+	public void put(K key, V val) {
 		  map.put(key, val);
 		  sorted = null;
 		  intervals.add(key);		  
@@ -75,8 +75,8 @@ public class IntervalArrayHashMap<K extends Comparable, V> implements IntervalMa
 	/**
 	 * @see java.util.Map#containsKey(java.lang.Object)
 	 */
-	public boolean containsKey(Object key) {
-		Comparable ckey = (Comparable)key;
+	public boolean containsKey(Object key) { 
+	  Comparable ckey = (Comparable)key;
 		if(ckey.compareTo(intervals.get(intervals.size()-1)) < 1)
 			return true;
 		else
@@ -93,7 +93,7 @@ public class IntervalArrayHashMap<K extends Comparable, V> implements IntervalMa
 	/**
 	 * @see java.util.Map#entrySet()
 	 */
-	public Set entrySet() {
+	public Set<Entry<Comparable<K>,V>> entrySet() {	  
 		return map.entrySet();
 	}
 
@@ -152,7 +152,7 @@ public class IntervalArrayHashMap<K extends Comparable, V> implements IntervalMa
 	/**
 	 * @see java.util.Map#keySet()
 	 */
-	public Set keySet() {
+	public Set<Comparable<K>> keySet() {
 		return map.keySet();
 	}
 
