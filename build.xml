@@ -12,11 +12,6 @@
 	
 	<property name="extlib.dir" value="/opt/java_stuff"/>
 
-	<path id="test.classpath">
-	    <pathelement location="/opt/eclipse/plugins/org.junit_3.8.1/junit.jar"/>
-	    <pathelement location="/opt/eclipse/plugins/org.eclipse.hyades.test.tools.core_4.2.3.v200701141614/common.runner.jar" />
-	    <pathelement location="/opt/eclipse/plugins/org.eclipse.hyades.test.tools.core_4.2.3.v200701141614/java.runner.jar" />
-	</path>
 
     <path id="classpath">
     	<path refid="test.classpath"/>
@@ -62,10 +57,17 @@
     </target>
 
 
-    <!-- ================================= 
+	<!-- ================================= 
+          target: test-all              
+         ================================= -->
+    <target name="test-all" depends="compile, test-checkstyle, test-java" description="run all tests: checkstyle, junit, etc.">
+        
+    </target>
+
+	<!-- ================================= 
           target: build              
          ================================= -->
-    <target name="build" depends="distjar" description="incremtaly build all elements">
+    <target name="build" depends="test-all, distjar, docs, srcjar" description="incremtaly build all elements">
 
     </target>
 
@@ -73,7 +75,7 @@
     <!-- ================================= 
           target: docs              
          ================================= -->
-	<target name="coverage_java" depends="test_java">
+	<target name="coverage_java" depends="test-java">
 	    <cobertura-report format="html" srcdir="${srcdir}" 
 	    	datafile="${basedir}/cobertura.ser" destdir="${coverage.dir}"/>
 	</target>
@@ -81,13 +83,6 @@
     <target name="docs" depends="prepare,coverage_java" description="--> create all documentation">
     </target>
 
-
-    <!-- ================================= 
-          target: all              
-         ================================= -->
-    <target name="all"  depends="build,test_java,docs,srcjar" description="build all from scratch">
-
-    </target>
 
 
 	<!-- =================================
@@ -117,14 +112,14 @@
 	</target>
 
 	<!-- ================================= 
-          target: test_java              
+          target: test-java              
          ================================= -->
 	<property name="test-report.dir" value="${basedir}/test-results"/>
 		
-	<target name="test_java" depends="compile_java,instrument_java" description="run all tests">
+	<target name="test-java" depends="compile_java,instrument_java" description="run all tests">
 		<echo>test-report.dir is ${test-report.dir}</echo>
 		<echo>copertura data file is ${basedir}/cobertura.ser</echo>
-		<junit fork="yes">
+		<junit fork="yes" haltonfailure="yes">
 			<sysproperty key="java.security.policy" value="${srcdir}/de/harper_hall/wotan/broker/broker.policy"/>
 			<sysproperty key="net.sourceforge.cobertura.datafile" value="${basedir}/cobertura.ser" />
 			<classpath>
@@ -137,9 +132,29 @@
 				todir="${test-report.dir}"/>
 		</junit>
 		<cobertura-report srcdir="${srcdir}" destdir="${test-report.dir}"/>
+		<cobertura-report srcdir="${srcdir}" destdir="${test-report.dir}" format="xml"/>
 	</target>
 
 
+	<!-- ================================= 
+          target: test-checkstyle              
+         ================================= -->
+	<taskdef resource="checkstyletask.properties"
+	         classpath="${tool.dir}/checkstyle-all-5.0.jar"/>
+
+		
+    <target name="test-checkstyle" depends="" 
+    	description="--> check the style of the source code and run some static quality checks on the code.">
+    	<sequential>
+			<mkdir dir="${basedir}/test-results"/>
+            <checkstyle config="${basedir}/checkstyle.xml" failOnViolation="true">
+				<formatter type="plain" />
+    	        <formatter type="xml" toFile="${basedir}/test-results/checkstyle-log.xml" />
+    	        <fileset dir="${src.dir}" includes="**/*.java" />
+    	        <property key="checkstyle.cache.file" file="${build.dir}/checkstyle-cache" />
+    	    </checkstyle>
+    	</sequential>
+    </target>
 
     <!-- - - - - - - - - - - - - - - - - - 
           target: compile_java 
