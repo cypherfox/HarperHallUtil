@@ -149,8 +149,8 @@
             <checkstyle config="${basedir}/checkstyle.xml" failOnViolation="true">
 				<formatter type="plain" />
     	        <formatter type="xml" toFile="${basedir}/test-results/checkstyle-log.xml" />
-    	        <fileset dir="${src.dir}" includes="**/*.java" />
-    	        <property key="checkstyle.cache.file" file="${build.dir}/checkstyle-cache" />
+    	        <fileset dir="${srcdir}" includes="**/*.java" />
+    	        <property key="checkstyle.cache.file" file="${bindir}/checkstyle-cache" />
     	    </checkstyle>
     	</sequential>
     </target>
