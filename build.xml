@@ -14,7 +14,6 @@
 
 
     <path id="classpath">
-    	<path refid="test.classpath"/>
     	<fileset dir="${tool.dir}">
     		<include name="**/*.jar"/>
     		<include name="**/*.zip"/>
