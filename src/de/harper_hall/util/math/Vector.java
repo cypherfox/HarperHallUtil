@@ -31,15 +31,15 @@ package de.harper_hall.util.math;
  * @author sage
  *
  */
-public abstract class Vector{
+public abstract class Vector {
   protected double[] values;
   
   /**
    * 
    * @param dimension
    */
-  public Vector(int dimension){
-    if(dimension <0) throw new NegativeArraySizeException();
+  public Vector(int dimension) {
+    if (dimension < 0) { throw new NegativeArraySizeException(); }
     values = new double[dimension];
   }
 
@@ -47,15 +47,17 @@ public abstract class Vector{
    * creates a 3D Vector
    *
    */
-  public Vector(){
-    values = new double[3];
+  public Vector() {
+    final int defaultDimension = 3;
+
+    values = new double[defaultDimension];
   }
 
   /** Get the dimension of this vector
    * 
    * @return dimension of this vector
    */
-  public int getDimension(){
+  public int getDimension() {
     return values.length;
   }
 

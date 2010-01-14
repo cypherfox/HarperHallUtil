@@ -29,17 +29,20 @@ public class LdapURLStreamHandler extends URLStreamHandler {
     return null;
   }
 
+  private static final int DEFAULT_PORT = 389;
+  
   @Override
   protected int getDefaultPort() {
-    return 389;
+    return DEFAULT_PORT;
   }
 
   @Override
   protected String toExternalForm(URL u) {
     // pre-compute length of StringBuffer
     int len = u.getProtocol().length() + 1;
-    if (u.getAuthority() != null && u.getAuthority().length() > 0)
+    if (u.getAuthority() != null && u.getAuthority().length() > 0) {
       len += 2 + u.getAuthority().length();
+    }
     if (u.getPath() != null) {
       len += 1 + u.getPath().length();
     }

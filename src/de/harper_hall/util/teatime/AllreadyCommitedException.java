@@ -17,11 +17,11 @@ package de.harper_hall.util.teatime;
 public class AllreadyCommitedException extends Exception {
 
   /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6890860757609616760L;
+   * 
+   */
+  private static final long serialVersionUID = 6890860757609616760L;
 
-public AllreadyCommitedException() {
+  public AllreadyCommitedException() {
     super();
     // TODO Auto-generated constructor stub
   }

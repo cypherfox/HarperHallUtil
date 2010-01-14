@@ -14,66 +14,68 @@ import de.harper_hall.util.collections.IntervalMap;
  * <i>/HarperHallUtil/src/de/harper_hall/util/collections/tests/IntervalArrayHashMapTest.testsuite</i>.
  */
 public class IntervalArrayHashMapTest extends HyadesTestCase {
-	/**
-	 * Constructor for IntervalArrayHashMapTest.
-	 * @param name
-	 */
-	public IntervalArrayHashMapTest(String name) {
-		super(name);
-	}
 
-	/**
-	 * Returns the JUnit test suite that implements the <b>IntervalArrayHashMapTest</b>
-	 * definition.
-	 */
-	public static Test suite() {
-		HyadesTestSuite intervalArrayHashMapTest = new HyadesTestSuite(
-				"IntervalArrayHashMapTest");
-		intervalArrayHashMapTest.setArbiter(DefaultTestArbiter.INSTANCE).setId(
-				"FD5AB9783D3626DF1792C1B033A011DC");
-	
-		intervalArrayHashMapTest.addTest(new IntervalArrayHashMapTest(
-				"testIntervalRetrieval").setId("FD5AB9783D3626DF281A04D033A011DC")
-				.setTestInvocationId("FD5AB9783D3626DF4F784BE033A011DC"));
-		return intervalArrayHashMapTest;
-	}
+  /**
+   * Constructor for IntervalArrayHashMapTest.
+   * 
+   * @param name
+   */
+  public IntervalArrayHashMapTest(String name) {
+    super(name);
+  }
 
-	IntervalMap<Integer, String> map = new IntervalArrayHashMap<Integer, String>();
-	
-	/**
-	 * @see junit.framework.TestCase#setUp()
-	 */
-	protected void setUp() throws Exception {
-		// load some values
-		map.clear();
-		map.put(1, "one");
-		map.put(5, "five");
-		map.put(10, "ten");
-		
-	}
+  /**
+   * Returns the JUnit test suite that implements the <b>IntervalArrayHashMapTest</b> definition.
+   */
+  public static Test suite() {
+    HyadesTestSuite intervalArrayHashMapTest = new HyadesTestSuite("IntervalArrayHashMapTest");
+    intervalArrayHashMapTest.setArbiter(DefaultTestArbiter.INSTANCE).setId("FD5AB9783D3626DF1792C1B033A011DC");
 
-	/**
-	 * @see junit.framework.TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-	}
+    intervalArrayHashMapTest.addTest(new IntervalArrayHashMapTest("testIntervalRetrieval")
+        .setId("FD5AB9783D3626DF281A04D033A011DC").setTestInvocationId("FD5AB9783D3626DF4F784BE033A011DC"));
+    return intervalArrayHashMapTest;
+  }
 
-	/**
-	* testIntervalRetrieval
-	*
-	* Try various keys when retrieving from the container.
-	* 
-	* @throws Exception
-	*/
-	public void testIntervalRetrieval()
-	throws Exception
-	{
-		assertEquals("five", map.get(2));
-		assertEquals("one", map.get(0));
-		map.setLastForBeyond(false);
-		assertEquals(null, map.get(11));
-		map.setLastForBeyond(true);
-		assertEquals("ten", map.get(11));
-	}
+  IntervalMap<Integer, String> map = new IntervalArrayHashMap<Integer, String>();
+
+  
+  /**
+   * @see junit.framework.TestCase#setUp()
+   */
+  protected void setUp() throws Exception {
+    // load some values
+    map.clear();
+    // CHECKSTYLE OFF MagicNumber
+    map.put(1, "one");
+    map.put(5, "five");
+    map.put(10, "ten");
+    // CHECKSTYLE ON
+
+  }
+
+  /**
+   * @see junit.framework.TestCase#tearDown()
+   */
+  protected void tearDown() throws Exception {
+  }
+
+  /**
+   * testIntervalRetrieval
+   * 
+   * Try various keys when retrieving from the container.
+   * 
+   * @throws Exception
+   */
+  public void testIntervalRetrieval() throws Exception {
+    // CHECKSTYLE OFF MagicNumber
+    assertEquals("five", map.get(2));
+    assertEquals("one", map.get(0));
+    map.setLastForBeyond(false);
+    assertEquals(null, map.get(11));
+    map.setLastForBeyond(true);
+    assertEquals("ten", map.get(11));
+    // CHECKSTYLE ON
+
+  }
 
 }

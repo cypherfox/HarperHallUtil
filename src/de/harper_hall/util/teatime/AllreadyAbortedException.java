@@ -17,11 +17,11 @@ package de.harper_hall.util.teatime;
 public class AllreadyAbortedException extends Exception {
 
   /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3372625280132763954L;
+   * 
+   */
+  private static final long serialVersionUID = -3372625280132763954L;
 
-public AllreadyAbortedException() {
+  public AllreadyAbortedException() {
     super();
   }
 

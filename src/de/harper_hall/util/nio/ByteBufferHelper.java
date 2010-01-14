@@ -17,35 +17,41 @@
  */
 package de.harper_hall.util.nio;
 
-import java.nio.*;
+import java.nio.ByteBuffer;
 
 public class ByteBufferHelper {
-  
+
+  protected ByteBufferHelper() { }
   /**
    * 
    * @param a
    * @param b
-   * @param n number of byte to which compare the buffers
-   * @return -1 is a is smaller; 0 if they are equal to ; +1 if a is larger than b 
+   * @param n
+   *          number of byte to which compare the buffers
+   * @return -1 is a is smaller; 0 if they are equal to ; +1 if a is larger than b
    */
-  public static  int compareBufferN(ByteBuffer a, ByteBuffer b, int n){
-    int i, comp_n;
+  public static int compareBufferN(ByteBuffer a, ByteBuffer b, int n) {
+    int i, compN;
     ByteBuffer bt = b.slice();
     ByteBuffer at = a.slice();
-    
-    comp_n = Math.min(n, at.capacity());
-    comp_n = Math.min(comp_n, bt.capacity());
 
-    for(i=0;i<comp_n;i++){
+    compN = Math.min(n, at.capacity());
+    compN = Math.min(compN, bt.capacity());
+
+    for (i = 0; i < compN; i++) {
       byte ab = at.get();
       byte bb = bt.get();
-      if(ab < bb) return -1;
-      if(ab > bb) return +1;
+      if (ab < bb) { return -1; }
+      if (ab > bb) { return +1; }
     }
     // ok, so far they are equal
 
-    if(bt.capacity() < Math.min(at.capacity(),n)) return +1;
-    if(at.capacity() < Math.min(bt.capacity(),n)) return -1;
+    if (bt.capacity() < Math.min(at.capacity(), n)) {
+      return +1;
+    }
+    if (at.capacity() < Math.min(bt.capacity(), n)) {
+      return -1;
+    }
 
     return 0;
   }

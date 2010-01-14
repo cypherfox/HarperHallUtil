@@ -17,7 +17,7 @@ public class HelloWorld {
     super();
   }
 
-  public void doHelloWorld(){
+  public void doHelloWorld() {
     System.out.println("Hello World!");
   }
 

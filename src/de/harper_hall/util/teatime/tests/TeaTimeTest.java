@@ -61,8 +61,7 @@ public class TeaTimeTest extends HyadesTestCase {
   * @throws Exception
   */
   public void bankTransaction1()
-  throws Exception
-  {
+  throws Exception {
   // Enter your code here
   }
 
@@ -76,8 +75,7 @@ public class TeaTimeTest extends HyadesTestCase {
   * @throws Exception
   */
   public void bankTransaction2()
-  throws Exception
-  {
+  throws Exception {
   // Enter your code here
   }
 

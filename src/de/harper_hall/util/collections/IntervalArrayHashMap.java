@@ -35,163 +35,171 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * This implementation uses a sorted cache to speed up lookups. Therefore it is useful
- * to do all inserts, then all lookups. This will improve the time requirements towards
- * O(log(n)) for lookups. If calls to the put method are evenly mixed with calls to get,
- * the performance will degrade to O(n*log(n)) for time. The cost for space is always
- * O(n).
+ * This implementation uses a sorted cache to speed up lookups. Therefore it is useful to do all inserts, then all
+ * lookups. This will improve the time requirements towards O(log(n)) for lookups. If calls to the put method are evenly
+ * mixed with calls to get, the performance will degrade to O(n*log(n)) for time. The cost for space is always O(n).
  * 
  * @author sage
- *
+ * 
  */
-public class IntervalArrayHashMap<K extends Comparable<K>, V> implements IntervalMap<K,V> {
+public class IntervalArrayHashMap<K extends Comparable<K>, V> implements IntervalMap<K, V> {
 
-	private List<Comparable<K>> intervals = new ArrayList<Comparable<K>>();
-	private Comparable<K>[] sorted = null;
-	private Map<Comparable<K>,V> map = new HashMap<Comparable<K>,V>();
+  private List<Comparable<K>> intervals = new ArrayList<Comparable<K>>();
 
-	private boolean lastForBeyond = false;
-	
-	/**
-	 * @see de.harper_hall.util.collections.IntervalMap#put(java.lang.Comparable, java.lang.Object)
-	 */
+  private Comparable<K>[] sorted = null;
 
-	public void put(K key, V val) {
-		  map.put(key, val);
-		  sorted = null;
-		  intervals.add(key);		  
-	}
+  private Map<Comparable<K>, V> map = new HashMap<Comparable<K>, V>();
 
-	/**
-	 * TODO: synchronize
-	 * @see java.util.Map#clear()
-	 */
-	public void clear() {
-		intervals.clear();
-		sorted = null;
-		map.clear();
-	}
+  private boolean lastForBeyond = false;
 
-	/**
-	 * @see java.util.Map#containsKey(java.lang.Object)
-	 */
-	public boolean containsKey(Object key) { 
-	  Comparable ckey = (Comparable)key;
-		if(ckey.compareTo(intervals.get(intervals.size()-1)) < 1)
-			return true;
-		else
-			return false;
-	}
+  /**
+   * @see de.harper_hall.util.collections.IntervalMap#put(java.lang.Comparable, java.lang.Object)
+   */
 
-	/**
-	 * @see java.util.Map#containsValue(java.lang.Object)
-	 */
-	public boolean containsValue(Object value) {
-		return map.containsValue(value);
-	}
+  public void put(K key, V val) {
+    map.put(key, val);
+    sorted = null;
+    intervals.add(key);
+  }
 
-	/**
-	 * @see java.util.Map#entrySet()
-	 */
-	public Set<Entry<Comparable<K>,V>> entrySet() {	  
-		return map.entrySet();
-	}
+  /**
+   * TODO: synchronize
+   * 
+   * @see java.util.Map#clear()
+   */
+  public void clear() {
+    intervals.clear();
+    sorted = null;
+    map.clear();
+  }
 
-	/**
-	 * implementation may take up to O(log(n)) to find value
-	 * 
-	 * TODO: synchronization
-	 * @see java.util.Map#get(java.lang.Object)
-	 */
-	public Object get(Object key) {
-		int pos;
-		
-		if(sorted == null){
-		  sorted = intervals.toArray(new Comparable[0]);
-		  Arrays.sort(sorted);
-		}
-		pos = Arrays.binarySearch(sorted, key);
-		if(pos < 0) {
-			pos++;
-			pos *= -1;
-		}
-		
-		// value beyond the last element
-		if(pos >= intervals.size()){
-			if(lastForBeyond){
-				return map.get(intervals.get(pos-1));
-			}else{
-				return null;
-			}
-		}
-		
-		return map.get(intervals.get(pos));
-	}
+  /**
+   * @see java.util.Map#containsKey(java.lang.Object)
+   */
+  @SuppressWarnings("unchecked")
+  public boolean containsKey(Object key) {
+    if (!(key instanceof Comparable<?>)) { return false; }
+    Comparable ckey = (Comparable) key;
+    return (ckey.compareTo(intervals.get(intervals.size() - 1)) < 1);
+  }
 
-	/**
-	 * @return the lastForBexon
-	 */
-	public boolean isLastForBeyond() {
-		return lastForBeyond;
-	}
+  /**
+   * @see java.util.Map#containsValue(java.lang.Object)
+   */
+  public boolean containsValue(Object value) {
+    return map.containsValue(value);
+  }
 
-	/**
-	 * @param lastForBexon the lastForBexon to set
-	 */
-	public void setLastForBeyond(boolean lastForBeyond) {
-		this.lastForBeyond = lastForBeyond;
-	}
+  /**
+   * @see java.util.Map#entrySet()
+   */
+  public Set<Entry<Comparable<K>, V>> entrySet() {
+    return map.entrySet();
+  }
 
-	/**
-	 * @see java.util.Map#isEmpty()
-	 */
-	public boolean isEmpty() {
-		return map.isEmpty();
-	}
+  /**
+   * implementation may take up to O(log(n)) to find value
+   * 
+   * TODO: synchronization
+   * 
+   * @see java.util.Map#get(java.lang.Object)
+   */
+  public Object get(Object key) {
+    int pos;
 
-	/**
-	 * @see java.util.Map#keySet()
-	 */
-	public Set<Comparable<K>> keySet() {
-		return map.keySet();
-	}
+    if (sorted == null) {
+      sorted = intervals.toArray(new Comparable[0]);
+      Arrays.sort(sorted);
+    }
+    pos = Arrays.binarySearch(sorted, key);
+    if (pos < 0) {
+      pos++;
+      pos *= -1;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
-	 */
-	public Object put(Object key, Object value) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // value beyond the last element
+    if (pos >= intervals.size()) {
+      if (lastForBeyond) {
+        return map.get(intervals.get(pos - 1));
+      } else {
+        return null;
+      }
+    }
 
-	/* (non-Javadoc)
-	 * @see java.util.Map#putAll(java.util.Map)
-	 */
-	public void putAll(Map t) {
-		// TODO Auto-generated method stub
-		
-	}
+    return map.get(intervals.get(pos));
+  }
 
-	/* (non-Javadoc)
-	 * @see java.util.Map#remove(java.lang.Object)
-	 */
-	public Object remove(Object key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  /**
+   * @return the lastForBexon
+   */
+  public boolean isLastForBeyond() {
+    return lastForBeyond;
+  }
 
-	/**
-	 * @see java.util.Map#size()
-	 */
-	public int size() {
-		return map.size();
-	}
+  /**
+   * @param lastForBexon
+   *          the lastForBexon to set
+   */
+  public void setLastForBeyond(boolean lastForBeyond) {
+    this.lastForBeyond = lastForBeyond;
+  }
 
-	/**
-	 * @see java.util.Map#values()
-	 */
-	public Collection values() {
-		return map.values();
-	}
+  /**
+   * @see java.util.Map#isEmpty()
+   */
+  public boolean isEmpty() {
+    return map.isEmpty();
+  }
+
+  /**
+   * @see java.util.Map#keySet()
+   */
+  public Set<Comparable<K>> keySet() {
+    return map.keySet();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.util.Map#put(java.lang.Object, java.lang.Object)
+   */
+  public Object put(Object key, Object value) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.util.Map#putAll(java.util.Map)
+   */
+  public void putAll(Map t) {
+    // TODO Auto-generated method stub
+
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.util.Map#remove(java.lang.Object)
+   */
+  public Object remove(Object key) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  /**
+   * @see java.util.Map#size()
+   */
+  public int size() {
+    return map.size();
+  }
+
+  /**
+   * @see java.util.Map#values()
+   */
+  public Collection values() {
+    return map.values();
+  }
 
 }

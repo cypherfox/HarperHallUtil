@@ -21,18 +21,20 @@ public class PseudoTimeEnvironment {
     super();
     
     start = System.currentTimeMillis();
-    last = deviance = 0;
+    last = 0;
+    deviance = 0;
     
   }
 
-  public synchronized PseudoTime getPseudoTime(){
+  public synchronized PseudoTime getPseudoTime() {
 
     long now = System.currentTimeMillis();
-    if(now == last) 
+    if (now == last) {
       deviance++; //adjust time, since we allready have generated value this tick
-    else 
+    } else { 
       last = now;
+    }
     
-    return new PseudoTime(start,last+deviance);
+    return new PseudoTime(start, last + deviance);
   }
 }

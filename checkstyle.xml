@@ -41,7 +41,9 @@
         <module name="LineLength">
             <property name="max" value="120" />
         </module>
-        <module name="ParameterNumber" />
+        <module name="ParameterNumber">
+             <property name="max" value="10"/>
+        </module>
 
         <!-- Whitespace -->
         <module name="EmptyForInitializerPad" />
@@ -179,8 +181,9 @@
     </module>
 
 	<module name="SuppressionCommentFilter">
-    	<property name="onCommentFormat" value="CHECKSTYLE ON"/>
-    	<property name="offCommentFormat" value="CHECKSTYLE OFF"/>
+    	<property name="offCommentFormat" value="CHECKSTYLE OFF ([\w\|]+)"/>
+    	<property name="onCommentFormat" value="CHECKSTYLE ON ([\w\|]+)"/>
+        <property name="checkFormat" value="$1"/>
 	</module>
 
 	<!-- 

@@ -57,28 +57,31 @@ public class VectorTest extends HyadesTestCase {
    * @throws Exception
    */
   public void testAdd() throws Exception {
-    double[] init_a = {1.0,2.0,3.0};
-    double[] init_b = {5.0,6.0,7.0};
-    double[] result_arr = {6.0,8.0,10.0};
-    int i; boolean ex_caught = false;
+    // CHECKSTYLE OFF MagicNumber
+    double[] initA = {1.0, 2.0, 3.0};
+    double[] initB = {5.0, 6.0, 7.0};
+    double[] resultArr = {6.0, 8.0, 10.0};
 
-    CartesianVector a = new CartesianVector(init_a);
-    Vector b = new CartesianVector(init_b);
+    int i; boolean exCaught = false;
+
+    CartesianVector a = new CartesianVector(initA);
+    Vector b = new CartesianVector(initB);
     CartesianVector result;
     Vector c = new CartesianVector(4);
     
     result = (CartesianVector) a.add(b);
     
-    for(i=0;i<3;i++){
-      assertEquals(result_arr[i],result.getElement(i));
+    for (i = 0; i < 3; i++) {
+      assertEquals(resultArr[i], result.getElement(i));
     }
+    // CHECKSTYLE ON MagicNumber
     
-    try{
+    try {
       c.add(a);
-    }catch(IndexOutOfBoundsException ex){
-      ex_caught = true;
+    } catch (IndexOutOfBoundsException ex) {
+      exCaught = true;
     }
-    assertTrue("Exception not caught for addition with differing vector addition",ex_caught);
+    assertTrue("Exception not caught for addition with differing vector addition", exCaught);
     
   }
 

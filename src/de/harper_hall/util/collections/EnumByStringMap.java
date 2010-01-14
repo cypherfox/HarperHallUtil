@@ -203,8 +203,9 @@ public class EnumByStringMap<E extends Enum<E>, V> implements Map<String, V> {
   public V remove(String key) {
     if (doUpper) {
       return enumMap.remove(Enum.valueOf(enumClass, key.toUpperCase()));
-    } else
+    } else {
       return enumMap.remove(Enum.valueOf(enumClass, key));
+    }
   }
 
   /*
@@ -213,15 +214,17 @@ public class EnumByStringMap<E extends Enum<E>, V> implements Map<String, V> {
    * @see java.util.Map#remove(java.lang.Object)
    */
   public V remove(Object key) {
-    if (!(key instanceof String))
+    if (!(key instanceof String)) {
       return null;
+    }
 
     String s = (String) key;
 
     if (doUpper) {
       return enumMap.remove(Enum.valueOf(enumClass, s.toUpperCase()));
-    } else
+    } else {
       return enumMap.remove(Enum.valueOf(enumClass, s));
+    }
   }
 
   /**

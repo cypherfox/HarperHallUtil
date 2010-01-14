@@ -53,7 +53,7 @@ public class SphericalVector extends Vector {
    */
   @Override
   public Vector add(Vector vec) {
-    CartesianVector a= new CartesianVector(this);
+    CartesianVector a = new CartesianVector(this);
     return a.add(vec);
   }
 
@@ -64,7 +64,7 @@ public class SphericalVector extends Vector {
    */
   @Override
   public Vector sub(Vector vec) {
-    CartesianVector a= new CartesianVector(this);
+    CartesianVector a = new CartesianVector(this);
     return a.add(vec);
   }
 
@@ -76,7 +76,7 @@ public class SphericalVector extends Vector {
     Vector retval = new CartesianVector(values.length);
 
     System.arraycopy(values, 0, retval.values, 0, values.length);
-    retval.values[0]=1;
+    retval.values[0] = 1;
         
     return retval;
   }

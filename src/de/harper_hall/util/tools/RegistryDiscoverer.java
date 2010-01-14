@@ -20,38 +20,44 @@ import java.rmi.RemoteException;
  */
 public class RegistryDiscoverer {
 
+  protected RegistryDiscoverer() { }
+  
   /**
    * @param args
    */
   public static void main(String[] args) {
     String hostname;
     String urltext;
-    String[] bound_objs = null;
+    String[] boundObjs = null;
     int i;
-    
-    if(args.length != 0){
-      hostname=args[0];
-    }else{
-      hostname="localhost";
+
+    if (args.length != 0) {
+      hostname = args[0];
+    } else {
+      hostname = "localhost";
     }
-    urltext="//"+hostname;
-    
+    urltext = "//" + hostname;
+
     try {
-      bound_objs = Naming.list("//"+hostname);
+      boundObjs = Naming.list("//" + hostname);
     } catch (RemoteException e) {
-      System.err.println("could not contact registry on host '"+hostname+"'");
+      System.err.println("could not contact registry on host '" + hostname + "'");
+      // CHECKSTYLE OFF MagicNumber
       System.exit(255);
+      // CHECKSTYLE ON MagicNumber
     } catch (MalformedURLException e) {
-      System.err.println("the hostname '"+hostname+"' has produced an invalid URL '"+urltext+"'");
+      System.err.println("the hostname '" + hostname + "' has produced an invalid URL '" + urltext + "'");
+      // CHECKSTYLE OFF MagicNumber
       System.exit(255);
+      // CHECKSTYLE ON MagicNumber
     }
 
-    if((bound_objs == null) || (bound_objs.length==0)){
-      System.out.println("No objects registered with registry on "+hostname);
+    if ((boundObjs == null) || (boundObjs.length == 0)) {
+      System.out.println("No objects registered with registry on " + hostname);
       System.exit(1);
     }
-    for(i=0;i<bound_objs.length;i++){
-      System.out.println(bound_objs[i]);
+    for (i = 0; i < boundObjs.length; i++) {
+      System.out.println(boundObjs[i]);
     }
   }
 

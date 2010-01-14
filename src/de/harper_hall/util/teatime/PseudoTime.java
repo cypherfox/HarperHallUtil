@@ -15,23 +15,24 @@ package de.harper_hall.util.teatime;
  * 
  * @author sage
  */
-public class PseudoTime implements Comparable{
+public class PseudoTime implements Comparable {
 
-  protected long pte_start;
-  protected long atomic_start;
-  
+  protected long pteStart;
+
+  protected long atomicStart;
+
   private PseudoTime() {
   }
 
   /**
-   * @param atomic_start
-   * @param pte_start
+   * @param atomicStart
+   * @param pteStart
    */
-  public PseudoTime(long atomic_start, long pte_start) {
+  public PseudoTime(long atomicStart, long pteStart) {
     super();
     // TODO Auto-generated constructor stub
-    this.atomic_start = atomic_start;
-    this.pte_start = pte_start;
+    this.atomicStart = atomicStart;
+    this.pteStart = pteStart;
   }
 
   /**
@@ -40,16 +41,29 @@ public class PseudoTime implements Comparable{
    */
   @Override
   public boolean equals(Object obj) {
-    try{
-      PseudoTime pt_obj = (PseudoTime) obj;
-      
-      if(pt_obj.atomic_start != atomic_start) return false;
+    try {
+      PseudoTime ptObj = (PseudoTime) obj;
 
-      if(pt_obj.pte_start != pte_start) return false;
-      
-    }catch (ClassCastException cce){return false;}
+      if (ptObj.atomicStart != atomicStart) { return false; }
+
+      if (ptObj.pteStart != pteStart) { return false; }
+
+    } catch (ClassCastException cce) {
+      return false;
+    }
 
     return true;
+  }
+
+  /**
+   * 
+   */
+  @Override
+  public int hashCode() {
+    final int intLen = 31;
+    
+    return (int) ((pteStart * atomicStart) % (1L << intLen));
+
   }
 
   /**
@@ -58,24 +72,24 @@ public class PseudoTime implements Comparable{
    * @return
    */
   public int compareTo(Object o) {
-    PseudoTime pt_obj = (PseudoTime) o;
+    PseudoTime ptObj = (PseudoTime) o;
 
-    if(pt_obj.pte_start > pte_start) return -1;
-    if(pt_obj.pte_start < pte_start) return +1;
+    if (ptObj.pteStart > pteStart) {  return -1; }
+    if (ptObj.pteStart < pteStart) {  return +1; }
 
-    if(pt_obj.atomic_start > atomic_start) return -1;
-    if(pt_obj.atomic_start < atomic_start) return +1;
+    if (ptObj.atomicStart > atomicStart) {  return -1; }
+    if (ptObj.atomicStart < atomicStart) {  return +1; }
 
     return 0;
   }
 
-  /** 
+  /**
    * 
    * @param o
    * @return true if this object is less than o
    */
-  
-  public boolean lessThen(Object o){
+
+  public boolean lessThen(Object o) {
     return (compareTo(o) == -1);
   }
 }

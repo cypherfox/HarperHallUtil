@@ -17,11 +17,11 @@ package de.harper_hall.util.teatime;
 public class LateReadException extends Exception {
 
   /**
-	 * 
-	 */
-	private static final long serialVersionUID = 887232896101346453L;
+   * 
+   */
+  private static final long serialVersionUID = 887232896101346453L;
 
-public LateReadException() {
+  public LateReadException() {
     super();
   }
 

@@ -28,7 +28,7 @@ import java.util.Set;
  * 
  * @author sage
  */
-public interface MultiMap<K,V> extends Map<K,V>{
+public interface MultiMap<K, V> extends Map<K, V> {
   
   /* TODO: the whole entrySet()/Entry Interface should preferably be adapted 
    * in MultiMap. But that would break the dependency on Map<K,V>
@@ -65,7 +65,7 @@ public interface MultiMap<K,V> extends Map<K,V>{
    * @throws IllegalArgumentException
    * @throws NullPointerException
    */
-  void    mergeAllSingle(Map<? extends K,? extends V> t) throws UnsupportedOperationException,  ClassCastException,
+  void    mergeAllSingle(Map<? extends K, ? extends V> t) throws UnsupportedOperationException, ClassCastException,
   IllegalArgumentException, NullPointerException;
 
   /**
@@ -76,7 +76,7 @@ public interface MultiMap<K,V> extends Map<K,V>{
    * @throws IllegalArgumentException
    * @throws NullPointerException
    */
-  void    mergeAllSet(Map<? extends K,Set<? extends V>> t) throws UnsupportedOperationException,  ClassCastException,
+  void    mergeAllSet(Map<? extends K, Set<? extends V>> t) throws UnsupportedOperationException,  ClassCastException,
   IllegalArgumentException, NullPointerException;
   
   /** Copies all of the mappings from the specified map to this map (optional operation).
@@ -87,7 +87,7 @@ public interface MultiMap<K,V> extends Map<K,V>{
    * @throws IllegalArgumentException
    * @throws NullPointerException
    */
-  void    putAllSingle(Map<? extends K,? extends V> t) throws UnsupportedOperationException,  ClassCastException,
+  void    putAllSingle(Map<? extends K, ? extends V> t) throws UnsupportedOperationException,  ClassCastException,
   IllegalArgumentException, NullPointerException;
 
   /** Copies all of the mappings from the specified map to this map (optional operation).
@@ -98,7 +98,7 @@ public interface MultiMap<K,V> extends Map<K,V>{
    * @throws IllegalArgumentException
    * @throws NullPointerException
    */
-  void    putAllSet(Map<? extends K,Set<? extends V>> t) throws UnsupportedOperationException,  ClassCastException,
+  void    putAllSet(Map<? extends K, Set<? extends V>> t) throws UnsupportedOperationException,  ClassCastException,
   IllegalArgumentException, NullPointerException;
 
   /**

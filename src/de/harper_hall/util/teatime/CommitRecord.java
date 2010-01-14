@@ -13,17 +13,17 @@ package de.harper_hall.util.teatime;
 
 import de.harper_hall.util.teatime.TObject.State;
 
-class CommitRecord{
+class CommitRecord {
   private State state = State.unknown;
   private PseudoTime timeout = null;
   
-  void commit(PseudoTime ttime) throws AllreadyAbortedException{
-    if(state == State.aborted) throw new AllreadyAbortedException();
+  void commit(PseudoTime ttime) throws AllreadyAbortedException {
+    if (state == State.aborted) { throw new AllreadyAbortedException(); }
     state = State.commited;
   }
   
-  public void abort() throws AllreadyCommitedException{
-    if(state == State.commited) throw new AllreadyCommitedException();
+  public void abort() throws AllreadyCommitedException {
+    if (state == State.commited) { throw new AllreadyCommitedException(); }
     state = State.aborted;
   }
 
@@ -31,8 +31,7 @@ class CommitRecord{
    * 
    * @return current state of 
    */
-  public State getState()
-  { 
+  public State getState() { 
     return state; 
   }
   
@@ -40,7 +39,7 @@ class CommitRecord{
     return timeout;
   }
   
-  public CommitRecord(PseudoTime deadline){
+  public CommitRecord(PseudoTime deadline) {
     timeout = deadline;
   }
 }

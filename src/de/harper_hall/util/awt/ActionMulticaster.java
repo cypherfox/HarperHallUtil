@@ -24,7 +24,7 @@ public class ActionMulticaster implements ActionListener {
    * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
    */
   public void actionPerformed(ActionEvent e) {
-    for(ActionListener al : listeners ){
+    for (ActionListener al : listeners) {
       al.actionPerformed(e);
     }
   }
@@ -41,7 +41,7 @@ public class ActionMulticaster implements ActionListener {
    * 
    * @param l listener to be removed
    */
-  public void removeActionListener(ActionListener l){
+  public void removeActionListener(ActionListener l) {
     listeners.remove(l);
   }
   

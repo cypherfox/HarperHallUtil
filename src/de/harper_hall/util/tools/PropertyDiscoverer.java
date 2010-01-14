@@ -15,7 +15,7 @@ import java.util.Iterator;
 
 public class PropertyDiscoverer {
 
-  public PropertyDiscoverer() {
+  protected PropertyDiscoverer() {
     super();
     // TODO Auto-generated constructor stub
   }
@@ -24,13 +24,13 @@ public class PropertyDiscoverer {
    * @param args
    */
   public static void main(String[] args) {
-     Iterator iter = System.getProperties().keySet().iterator();
-     
-    while(iter.hasNext()){
-      String next = (String)iter.next();
-      System.out.println(next+":"+System.getProperties().getProperty(next));
+    Iterator iter = System.getProperties().keySet().iterator();
+
+    while (iter.hasNext()) {
+      String next = (String) iter.next();
+      System.out.println(next + ":" + System.getProperties().getProperty(next));
     }
-    
+
   }
 
 }

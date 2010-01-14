@@ -17,11 +17,11 @@ package de.harper_hall.util.teatime;
 public class LaterVersionException extends Exception {
 
   /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1426452844875637347L;
+   * 
+   */
+  private static final long serialVersionUID = -1426452844875637347L;
 
-public LaterVersionException() {
+  public LaterVersionException() {
     super();
   }
 

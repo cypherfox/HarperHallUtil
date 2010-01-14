@@ -18,15 +18,17 @@ import java.util.Iterator;
  */
 public class EnvDiscoverer {
 
+  protected EnvDiscoverer() { }
+  
   /**
    * @param args
    */
   public static void main(String[] args) {
     Iterator iter = System.getenv().keySet().iterator();
-    
-    while(iter.hasNext()){
-      String next = (String)iter.next();
-      System.out.println(next+":"+System.getenv(next));
+
+    while (iter.hasNext()) {
+      String next = (String) iter.next();
+      System.out.println(next + ":" + System.getenv(next));
     }
   }
 }
