@@ -1,58 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="HarperHallUtil" default="distjar" basedir=".">
+<project name="HarperHallUtil" default="publish" basedir="."
+	xmlns:ivy="antlib:org.apache.ivy.ant" xmlns="antlib:org.apache.tools.ant">
 
 	<property name="srcdir" value="${basedir}/src"/>
 	<property name="bindir" value="${basedir}/bin"/>        
-	<property name="tool.dir" value="${basedir}/lib"/>
+	<property name="lib.dir" value="${basedir}/lib"/>
 	<property name="instrumented.bindir" value="${basedir}/instrumented.bin"/>        
 	<property name="testdir" value="/tmp/HarperHallUtil"/>        
 	<property name="coverage.dir" value="${basedir}/coverage"/>        
-	<property name="artifact.lib" value="${basedir}" />
 	
 	<property name="extlib.dir" value="/opt/java_stuff"/>
 
+	<property name="ivy.dir" value="${basedir}/ivy"/>
+	<property name="ivy.settings.file" value="${ivy.dir}/ivysettings.xml"/>
+	<property name="ivy.cache.dir" value="${ivy.dir}/cache"/>
 
-    <path id="classpath">
-    	<fileset dir="${tool.dir}">
-    		<include name="**/*.jar"/>
-    		<include name="**/*.zip"/>
-    	</fileset>
+	<property name="pub.version" value="532"/>
+	<property name="pub.status" value="integration"/>
+	<property name="pub.resolver" value="timadorus-upload"/>
+
+
+	<path id="tools.classpath">
+		<pathelement path="${java.class.path}/" />
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>
 	</path>
 
-	<!-- load the cobertura task definition --> 
-	<taskdef classpathref="classpath" resource="tasks.properties"/>
+	<path id="project.classpath">
+		<path refid="tools.classpath"/>
+		<fileset dir="${build.dir}">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+		</fileset>
+		<pathelement path="${build.dir}"/>
+	</path>
 
-	<!-- ================================= 
-          target: init              
-         ================================= -->
-    <target name="init" depends="" description="--> set up build process">
-    </target>
+	<patternset id="meta.files">
+		<include name="**/*.xml"/>
+		<include name="**/*.properties"/>
+		<include name="**/*.txt"/>		
+		<include name="**/*.list"/>
+	</patternset>
 
-	
     <!-- ================================= 
           target: prepare              
          ================================= -->
-    <target name="prepare" depends="init" description="--> set directories, basic files, etc.">
+    <target name="prepare" description="--> set directories, basic files, etc.">
         <mkdir dir="${bindir}"/>
     	<mkdir dir="${instrumented.bindir}"/>
 		<mkdir dir="${test-report.dir}"/>
     	<mkdir dir="${coverage.dir}"/>
     </target>
 
+	<!-- ================================= 
+	          target: resolve
+	     
+	     let ivy handle depencies to other projects                   
+	     ================================= -->
+    <target name="resolve" description="--> retrieve dependencies with ivy">
+    	<ivy:settings file="${ivy.settings.file}" />
+	    <ivy:resolve />
+        <ivy:retrieve pattern="${lib.dir}/[conf]/[artifact]-[revision](-[classifier]).[ext]" sync="true" />
+	    <ivy:report todir="${ivy.dir}/reports"/>
 
-    <!-- ================================= 
-          target: fetch              
-         ================================= -->
-    <target name="fetch" depends="init" description="get current code from versioninig system">
-        
+		<!-- after (hopefully) retrieving all dependencies, add the tasks -->
+		<!-- cobertura -->
+		<taskdef classpathref="tools.classpath" resource="tasks.properties"/>
+	    <!-- JUnit -->
+		<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask"
+				 classpathref="tools.classpath" />
+		<!-- Checkstyle -->
+		<taskdef resource="checkstyletask.properties"   classpathref="tools.classpath"/>
+
     </target>
-
 
     <!-- ================================= 
           target: compile              
          ================================= -->
-    <target name="compile" depends="prepare,compile_java" description="compile all code">
+    <target name="compile" depends="prepare,resolve,compile_java" description="compile all code">
     </target>
 
 
@@ -122,7 +150,7 @@
 			<sysproperty key="java.security.policy" value="${srcdir}/de/harper_hall/wotan/broker/broker.policy"/>
 			<sysproperty key="net.sourceforge.cobertura.datafile" value="${basedir}/cobertura.ser" />
 			<classpath>
-				<path refid="classpath"/>
+				<path refid="tools.classpath"/>
 				<pathelement path="${instrumented.bindir}"/>
 				<pathelement path="${bindir}"/>
 			</classpath>
@@ -138,10 +166,6 @@
 	<!-- ================================= 
           target: test-checkstyle              
          ================================= -->
-	<taskdef resource="checkstyletask.properties"
-	         classpath="${tool.dir}/checkstyle-all-5.0.jar"/>
-
-		
     <target name="test-checkstyle" depends="" 
     	description="--> check the style of the source code and run some static quality checks on the code.">
     	<sequential>
@@ -165,7 +189,7 @@
     	<echo message="bindir: ${bindir}"/>
     	<javac srcdir="${srcdir}"
             destdir="${bindir}"    		
-            classpathref="classpath"
+            classpathref="tools.classpath"
              debug="on"
     		debuglevel="lines,vars,source"
     	/>            
@@ -189,21 +213,18 @@
 
     </target>
 
-
-	
-    <target name="distjar"  description="Create a jar for the HarperHallUtil project" depends="compile_java">
-        <jar jarfile="harperHallUtil.jar" includes="**/*.class" excludes="**/*Test.class" basedir="${bindir}">
+    <target name="distjar"  description="Create a jar for the HarperHallUtil project" depends="compile">
+        <jar jarfile="${bindir}/harper-hall-util.jar" includes="**/*.class" excludes="**/*Test.class" basedir="${bindir}">
         </jar>
     </target>
 	
     <target name="srcjar"  description="Create a source jar for the HarperHallUtil project">
-        <jar jarfile="harperHallUtil-src.jar" includes="**" basedir="${srcdir}"/>
+        <jar jarfile="${bindir}/harper-hall-util-source.jar" includes="**" basedir="${srcdir}"/>
     </target>
 	
 	<target name="publish" depends="distjar,srcjar" description="write the jars to a directory for other projects to see">
-		<echo>artifact.lib: ${artifact.lib}</echo>
-		<mkdir dir="${artifact.lib}"/>
-		<copy file="${basedir}/harperHallUtil.jar" todir="${artifact.lib}"/>
-		<copy file="${basedir}/harperHallUtil-src.jar" todir="${artifact.lib}"/>
+	    <ivy:publish pubrevision="${pub.version}" status="${pub.status}" resolver="${pub.resolver}" >
+	        <artifacts pattern="${bindir}/[artifact].[ext]"/>
+	    </ivy:publish>
 	</target>
 </project> 
