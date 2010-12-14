@@ -223,7 +223,7 @@
     </target>
 	
 	<target name="publish" depends="distjar,srcjar" description="write the jars to a directory for other projects to see">
-	    <ivy:publish pubrevision="${pub.version}" status="${pub.status}" resolver="${pub.resolver}" >
+	    <ivy:publish pubrevision="${pub.version}" status="${pub.status}" resolver="${pub.resolver}" forcedeliver="true">
 	        <artifacts pattern="${bindir}/[artifact].[ext]"/>
 	    </ivy:publish>
 	</target>
