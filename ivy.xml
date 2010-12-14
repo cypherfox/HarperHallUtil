@@ -10,7 +10,7 @@
 		
 		<!--  tools -->
 		<dependency org="cobertura" name="cobertura" rev="1.9.4.1" conf="*->runtime"/>
-		<dependency org="checkstyle" name="checkstyle" rev="5.2" conf="*->runtime" />
+		<dependency org="com.puppycrawl.tools" name="checkstyle" rev="5.3" conf="*->runtime" />
 		<dependency org="org.eclipse.hyades" name="test-tools-core" rev="4.5.2" conf="*->runtime"/>
 		
     </dependencies>
