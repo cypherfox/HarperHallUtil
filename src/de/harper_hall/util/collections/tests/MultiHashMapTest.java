@@ -1,10 +1,8 @@
 package de.harper_hall.util.collections.tests;
 
-import junit.framework.Test;
+import static org.junit.Assert.assertEquals;
 
-import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;
-import org.eclipse.hyades.test.common.junit.HyadesTestCase;
-import org.eclipse.hyades.test.common.junit.HyadesTestSuite;
+import org.junit.Test;
 
 import de.harper_hall.util.collections.MultiHashMap;
 
@@ -14,52 +12,17 @@ import de.harper_hall.util.collections.MultiHashMap;
  * 
  * Test the basic behavior of the MultiHashMap
  */
-public class MultiHashMapTest extends HyadesTestCase {
-  /**
-   * Constructor for MultiHashMapTest.
-   * 
-   * @param name
-   */
-  public MultiHashMapTest(String name) {
-    super(name);
-  }
-
-  /**
-   * Returns the JUnit test suite that implements the <b>MultiHashMapTest</b> definition.
-   */
-  public static Test suite() {
-    HyadesTestSuite multiHashMapTest = new HyadesTestSuite("MultiHashMapTest");
-    multiHashMapTest.setArbiter(DefaultTestArbiter.INSTANCE).setId("EF13B452B7A0818D358F1850560011DA");
-
-    multiHashMapTest.addTest(new MultiHashMapTest("singleAddRemove").setId("EF13B452B7A0818D43DD3450560011DA")
-        .setTestInvocationId("EF13B452B7A0818D56A89B10560011DA"));
-
-    multiHashMapTest.addTest(new MultiHashMapTest("multiAddRemove").setId("EF13B452B7A0818D49934D30560011DA")
-        .setTestInvocationId("EF13B452B7A0818D5A421580560011DA"));
-
-    return multiHashMapTest;
-  }
-
-  /**
-   * @see junit.framework.TestCase#setUp()
-   */
-  protected void setUp() throws Exception {
-  }
-
-  /**
-   * @see junit.framework.TestCase#tearDown()
-   */
-  protected void tearDown() throws Exception {
-  }
+public class MultiHashMapTest {
 
   /**
    * SingleAddRemove
    * 
    * @throws Exception
    */
+  @Test
   public void singleAddRemove() throws Exception {
     MultiHashMap<String, String> mmap = new MultiHashMap<String, String>();
-    System.err.println("Runnng MultiHashMapTest");
+    //System.err.println("Runnng MultiHashMapTest");
 
     mmap.put("1", "one");
     mmap.put("2", "two");
@@ -79,6 +42,7 @@ public class MultiHashMapTest extends HyadesTestCase {
    * 
    * @throws Exception
    */
+  @Test
   public void multiAddRemove() throws Exception {
     MultiHashMap<String, String> mmap = new MultiHashMap<String, String>();
 

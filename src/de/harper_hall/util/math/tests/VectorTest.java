@@ -1,10 +1,9 @@
 package de.harper_hall.util.math.tests;
 
-import junit.framework.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;
-import org.eclipse.hyades.test.common.junit.HyadesTestCase;
-import org.eclipse.hyades.test.common.junit.HyadesTestSuite;
+import org.junit.Test;
 
 import de.harper_hall.util.math.CartesianVector;
 import de.harper_hall.util.math.Vector;
@@ -15,47 +14,12 @@ import de.harper_hall.util.math.Vector;
  *
  * Test the methods of the de.harper_hall.util.math.Vector class
  */
-public class VectorTest extends HyadesTestCase {
-  /**
-   * Constructor for VectorTest.
-   * @param name
-   */
-  public VectorTest(String name) {
-    super(name);
-  }
-
-  /**
-   * Returns the JUnit test suite that implements the <b>VectorTest</b>
-   * definition.
-   */
-  public static Test suite() {
-    HyadesTestSuite vectorTest = new HyadesTestSuite("VectorTest");
-    vectorTest.setArbiter(DefaultTestArbiter.INSTANCE)
-        .setId("FB58EDE596C3875D8184EC50582411DA");
-
-    vectorTest.addTest(new VectorTest("testAdd")
-        .setId("E664C69E32C04AB2CB95A5A0582411DA")
-        .setTestInvocationId("E664C69E32C04AB201B033D0582511DA"));
-
-    return vectorTest;
-  }
-
-  /**
-   * @see junit.framework.TestCase#setUp()
-   */
-  protected void setUp() throws Exception {
-  }
-
-  /**
-   * @see junit.framework.TestCase#tearDown()
-   */
-  protected void tearDown() throws Exception {
-  }
-
+public class VectorTest {
   /**
    * testAdd
    * @throws Exception
    */
+  @Test
   public void testAdd() throws Exception {
     // CHECKSTYLE OFF MagicNumber
     double[] initA = {1.0, 2.0, 3.0};
@@ -72,7 +36,7 @@ public class VectorTest extends HyadesTestCase {
     result = (CartesianVector) a.add(b);
     
     for (i = 0; i < 3; i++) {
-      assertEquals(resultArr[i], result.getElement(i));
+      assertEquals(resultArr[i], result.getElement(i), 0.0);
     }
     // CHECKSTYLE ON MagicNumber
     

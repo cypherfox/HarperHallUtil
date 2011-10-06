@@ -1,10 +1,10 @@
 package de.harper_hall.util.math.tests;
 
-import junit.framework.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;
-import org.eclipse.hyades.test.common.junit.HyadesTestCase;
-import org.eclipse.hyades.test.common.junit.HyadesTestSuite;
+import org.junit.Test;
 
 import de.harper_hall.util.math.ByteHelper;
 
@@ -12,46 +12,7 @@ import de.harper_hall.util.math.ByteHelper;
  * Generated code for the test suite <b>ByteHelperTest</b> located at
  * <i>/HarperHallUtil/src/de/harper_hall/util/math/tests/ByteHelperTest.testsuite</i>.
  */
-public class ByteHelperTest extends HyadesTestCase {
-  /**
-   * Constructor for ByteHelperTest.
-   * 
-   * @param name
-   */
-  public ByteHelperTest(String name) {
-    super(name);
-  }
-
-  /**
-   * Returns the JUnit test suite that implements the <b>ByteHelperTest</b> definition.
-   */
-  public static Test suite() {
-    HyadesTestSuite byteHelperTest = new HyadesTestSuite("ByteHelperTest");
-    byteHelperTest.setArbiter(DefaultTestArbiter.INSTANCE).setId("CA6FFE00591C665FA466AFE0E3E511DA");
-
-    byteHelperTest.addTest(new ByteHelperTest("testToByteArray").setId("CA6FFE00591C665F02A575C0E3FD11DA")
-        .setTestInvocationId("DFEDB4C6012A56FC3C92CB50F08911DA"));
-
-    byteHelperTest.addTest(new ByteHelperTest("testByteToSigned").setId("CA6FFE00591C665FB407EAE0E40811DA")
-        .setTestInvocationId("DFEDB4C6012A56FC401143B0F08911DA"));
-
-    byteHelperTest.addTest(new ByteHelperTest("testLongValueRanges").setId("DFEDB4C6012A56FC1B3031A0F08911DA")
-        .setTestInvocationId("DFEDB4C6012A56FC42C73BF0F08911DA"));
-
-    return byteHelperTest;
-  }
-
-  /**
-   * @see junit.framework.TestCase#setUp()
-   */
-  protected void setUp() throws Exception {
-  }
-
-  /**
-   * @see junit.framework.TestCase#tearDown()
-   */
-  protected void tearDown() throws Exception {
-  }
+public class ByteHelperTest {
 
   class TestvalRecord {
     public boolean littleEndian;
@@ -118,6 +79,7 @@ public class ByteHelperTest extends HyadesTestCase {
    * 
    * @throws Exception
    */
+  @Test
   public void testToByteArray() throws Exception {
     if (testVals == null) { init_testvals(); }
     int i;
@@ -145,6 +107,7 @@ public class ByteHelperTest extends HyadesTestCase {
    * 
    * @throws Exception
    */
+  @Test
   public void testByteToSigned() throws Exception {
     // CHECKSTYLE OFF MagicNumber
     assertTrue("expected    0, was " + ByteHelper.byteToSigned(0), 0 == ByteHelper.byteToSigned(0));
@@ -162,6 +125,7 @@ public class ByteHelperTest extends HyadesTestCase {
    * 
    * @throws Exception
    */
+  @Test
   public void testLongValueRanges() throws Exception {
     // CHECKSTYLE OFF MagicNumber
     byte[] valArr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };

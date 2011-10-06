@@ -1,10 +1,9 @@
 package de.harper_hall.util.collections.tests;
 
-import junit.framework.Test;
+import static org.junit.Assert.assertEquals;
 
-import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;
-import org.eclipse.hyades.test.common.junit.HyadesTestCase;
-import org.eclipse.hyades.test.common.junit.HyadesTestSuite;
+import org.junit.Before;
+import org.junit.Test;
 
 import de.harper_hall.util.collections.IntervalArrayHashMap;
 import de.harper_hall.util.collections.IntervalMap;
@@ -13,36 +12,16 @@ import de.harper_hall.util.collections.IntervalMap;
  * Generated code for the test suite <b>IntervalArrayHashMapTest</b> located at
  * <i>/HarperHallUtil/src/de/harper_hall/util/collections/tests/IntervalArrayHashMapTest.testsuite</i>.
  */
-public class IntervalArrayHashMapTest extends HyadesTestCase {
+public class IntervalArrayHashMapTest {
 
-  /**
-   * Constructor for IntervalArrayHashMapTest.
-   * 
-   * @param name
-   */
-  public IntervalArrayHashMapTest(String name) {
-    super(name);
-  }
-
-  /**
-   * Returns the JUnit test suite that implements the <b>IntervalArrayHashMapTest</b> definition.
-   */
-  public static Test suite() {
-    HyadesTestSuite intervalArrayHashMapTest = new HyadesTestSuite("IntervalArrayHashMapTest");
-    intervalArrayHashMapTest.setArbiter(DefaultTestArbiter.INSTANCE).setId("FD5AB9783D3626DF1792C1B033A011DC");
-
-    intervalArrayHashMapTest.addTest(new IntervalArrayHashMapTest("testIntervalRetrieval")
-        .setId("FD5AB9783D3626DF281A04D033A011DC").setTestInvocationId("FD5AB9783D3626DF4F784BE033A011DC"));
-    return intervalArrayHashMapTest;
-  }
 
   IntervalMap<Integer, String> map = new IntervalArrayHashMap<Integer, String>();
 
-  
   /**
    * @see junit.framework.TestCase#setUp()
    */
-  protected void setUp() throws Exception {
+  @Before
+  public void setUp() throws Exception {
     // load some values
     map.clear();
     // CHECKSTYLE OFF MagicNumber
@@ -54,18 +33,13 @@ public class IntervalArrayHashMapTest extends HyadesTestCase {
   }
 
   /**
-   * @see junit.framework.TestCase#tearDown()
-   */
-  protected void tearDown() throws Exception {
-  }
-
-  /**
    * testIntervalRetrieval
    * 
    * Try various keys when retrieving from the container.
    * 
    * @throws Exception
    */
+  @Test
   public void testIntervalRetrieval() throws Exception {
     // CHECKSTYLE OFF MagicNumber
     assertEquals("five", map.get(2));

@@ -1,12 +1,10 @@
 package de.harper_hall.util.nio.tests;
 
+import static org.junit.Assert.assertEquals;
+
 import java.nio.ByteBuffer;
 
-import junit.framework.Test;
-
-import org.eclipse.hyades.test.common.junit.DefaultTestArbiter;
-import org.eclipse.hyades.test.common.junit.HyadesTestCase;
-import org.eclipse.hyades.test.common.junit.HyadesTestSuite;
+import org.junit.Test;
 
 import de.harper_hall.util.nio.ByteBufferHelper;
 
@@ -14,48 +12,13 @@ import de.harper_hall.util.nio.ByteBufferHelper;
  * Generated code for the test suite <b>ByteBufferHelperTest</b> located at
  * <i>/HarperHallUtil/src/de/harper_hall/util/nio/tests/ByteBufferHelperTest.testsuite</i>.
  */
-public class ByteBufferHelperTest extends HyadesTestCase {
-  /**
-   * Constructor for ByteBufferHelperTest.
-   * @param name
-   */
-  public ByteBufferHelperTest(String name) {
-    super(name);
-  }
-
-  /**
-     * Returns the JUnit test suite that implements the <b>ByteBufferHelperTest</b>
-     * definition.
-     */
-    public static Test suite() {
-      HyadesTestSuite byteBufferHelperTest = new HyadesTestSuite(
-                                                                 "ByteBufferHelperTest");
-      byteBufferHelperTest.setArbiter(DefaultTestArbiter.INSTANCE)
-          .setId("E1429B574E48F49EB579EFB05AC711DA");
-  
-      byteBufferHelperTest.addTest(new ByteBufferHelperTest("compareNTest")
-          .setId("E1429B574E48F49EBAF019605AC711DA")
-          .setTestInvocationId("E1429B574E48F49ED1CB63105AC711DA"));
-  
-      return byteBufferHelperTest;
-    }
-
-  /**
-   * @see junit.framework.TestCase#setUp()
-   */
-  protected void setUp() throws Exception {
-  }
-
-  /**
-   * @see junit.framework.TestCase#tearDown()
-   */
-  protected void tearDown() throws Exception {
-  }
+public class ByteBufferHelperTest {
 
   /**
   * compareNTest
   * @throws Exception
   */
+  @Test
   public void compareNTest()
   throws Exception {
     // CHECKSTYLE OFF MagicNumber
