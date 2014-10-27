@@ -29,5 +29,9 @@
 			<ivy pattern="${upload.repo.url}/libs-releases-local/[organisation]/[module]/[revision]/ivy.xml" />
 			<artifact pattern="${upload.repo.url}/libs-releases-local/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
 		</url>
-	</resolvers>
+        <filesystem name="local-distro" m2compatible="true">
+                <ivy pattern="${basedir}/ivy-distro/[organisation]/[module]/[revision]/ivy.xml" />
+                <artifact pattern="${basedir}/ivy-distro/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+        </filesystem>
+    	</resolvers>
 </ivysettings>

@@ -1,25 +1,42 @@
-<ivy-module version="2.0" 
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd"
-            xmlns:m="http://ant.apache.org/ivy/maven">
-    <info organisation="de.harper-hall" module="harper-hall-util" revision="556"/>
-    
-        <configurations>
-    	<conf name="runtime"/>
-    	<conf name="testing" extends="runtime" visibility="private"/>
-    </configurations>
-    
-    <dependencies>    		
-		<dependency org="commons-collections" name="commons-collections" rev="3.2.1" conf="runtime"/>
-		<dependency org="org.gnu" name="getopt" rev="1.0.13" conf="runtime->default"/>
-		<dependency org="commons-configuration" name="commons-configuration" rev="1.6" conf="runtime->default,provided"/>
-		
-		
-		<!--  tools -->
-		<dependency org="junit" name="junit" rev="4.8.2" conf="testing->default"/>
-		<dependency org="cobertura" name="cobertura" rev="1.9.4.1" conf="testing->runtime"/>
-		<dependency org="com.puppycrawl.tools" name="checkstyle" rev="5.4" conf="testing->default" />
-		
-    </dependencies>
-    
+<ivy-module version="2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd"
+	xmlns:m="http://ant.apache.org/ivy/maven">
+	<info organisation="de.harper-hall" module="harper-hall-util"
+		revision="556" />
+
+	<configurations>
+		<conf name="runtime" />
+		<conf name="testing" extends="runtime" visibility="private" />
+	</configurations>
+
+	<dependencies>
+		<dependency org="commons-collections" name="commons-collections"
+			rev="3.2.1" conf="runtime" />
+		<dependency org="org.gnu" name="getopt" rev="1.0.13"
+			conf="runtime->default" />
+		<dependency org="commons-configuration" name="commons-configuration"
+			rev="1.6" conf="runtime->default,provided" />
+
+
+		<!-- tools -->
+		<dependency org="junit" name="junit" rev="4.8.2" conf="testing->default" />
+		<dependency org="org.jacoco" name="org.jacoco.ant" rev="0.7.2.201409121644" conf="testing->default">
+			<artifact name="org.jacoco.ant" type="jar" />
+		</dependency>
+		<dependency org="org.jacoco" name="org.jacoco.report" rev="0.7.2.201409121644" conf="testing->default">
+			<artifact name="org.jacoco.report" type="jar" />
+		</dependency>
+		<dependency org="org.jacoco" name="org.jacoco.core" rev="0.7.2.201409121644" conf="testing->default">
+			<artifact name="org.jacoco.core" type="jar" />
+		</dependency>
+		<dependency org="org.jacoco" name="org.jacoco.agent" rev="0.7.2.201409121644" conf="testing->default">
+			<artifact name="org.jacoco.agent" type="jar" />
+		</dependency>
+
+		<dependency org="com.puppycrawl.tools" name="checkstyle"
+			rev="5.4" conf="testing->default" />
+
+	</dependencies>
+
 </ivy-module>
