@@ -96,12 +96,8 @@
 
 
 	<!-- ================================= target: docs ================================= -->
-	<target name="coverage_java" depends="test-java">
-		<cobertura-report format="html" srcdir="${srcdir}"
-			datafile="${basedir}/cobertura.ser" destdir="${coverage.dir}" />
-	</target>
 
-	<target name="docs" depends="prepare,coverage_java" description="--> create all documentation">
+	<target name="docs" depends="prepare" description="--> create all documentation">
 	</target>
 
 

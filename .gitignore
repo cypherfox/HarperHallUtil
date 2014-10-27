@@ -1,0 +1,5 @@
+/bin/
+/coverage/
+/ivy-distro/
+/test-results/
+/jacoco.exec
