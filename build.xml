@@ -9,6 +9,7 @@
 	<property name="bindir" value="${basedir}/bin" />
 	<property name="lib.dir" value="${basedir}/lib" />
 	<property name="testdir" value="/tmp/HarperHallUtil" />
+    <property name="test-report.dir" value="${basedir}/test-results" />
 	<property name="coverage.dir" value="${basedir}/coverage" />
 
 	<property name="extlib.dir" value="/opt/java_stuff" />
@@ -112,7 +113,6 @@
 
 
 	<!-- ================================= target: test-java ================================= -->
-	<property name="test-report.dir" value="${basedir}/test-results" />
 
 	<target name="test-java" depends="compile_java"
 		description="run all tests">
@@ -120,8 +120,6 @@
 			<junit fork="yes" haltonfailure="yes">
 				<sysproperty key="java.security.policy"
 					value="${srcdir}/de/harper_hall/wotan/broker/broker.policy" />
-				<sysproperty key="net.sourceforge.cobertura.datafile"
-					value="${basedir}/cobertura.ser" />
 				<classpath>
 					<path refid="tools.classpath" />
 					<pathelement path="${bindir}" />
